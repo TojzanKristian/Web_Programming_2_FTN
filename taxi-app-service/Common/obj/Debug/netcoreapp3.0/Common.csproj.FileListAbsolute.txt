@@ -1,0 +1,9 @@
+C:\Users\krist\source\repos\TaxiApp\Common\bin\Debug\netcoreapp3.0\Common.deps.json
+C:\Users\krist\source\repos\TaxiApp\Common\bin\Debug\netcoreapp3.0\Common.dll
+C:\Users\krist\source\repos\TaxiApp\Common\bin\Debug\netcoreapp3.0\Common.pdb
+C:\Users\krist\source\repos\TaxiApp\Common\obj\Debug\netcoreapp3.0\Common.csproj.AssemblyReference.cache
+C:\Users\krist\source\repos\TaxiApp\Common\obj\Debug\netcoreapp3.0\Common.csproj.CoreCompileInputs.cache
+C:\Users\krist\source\repos\TaxiApp\Common\obj\Debug\netcoreapp3.0\Common.AssemblyInfoInputs.cache
+C:\Users\krist\source\repos\TaxiApp\Common\obj\Debug\netcoreapp3.0\Common.AssemblyInfo.cs
+C:\Users\krist\source\repos\TaxiApp\Common\obj\Debug\netcoreapp3.0\Common.dll
+C:\Users\krist\source\repos\TaxiApp\Common\obj\Debug\netcoreapp3.0\Common.pdb
