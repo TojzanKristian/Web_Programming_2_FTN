@@ -1,0 +1,46 @@
+.logPageStyle {
+    text-align: center;
+    background-image: url('Background/image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logContainerStyle {
+    text-align: center;
+    background-color: white;
+    width: 320px;
+    height: 200px;
+    border-radius: 8px;
+}
+
+.logFormStyle {
+    display: inline-block;
+    text-align: left;
+}
+
+.logTableStyle {
+    border-collapse: separate;
+    border-spacing: 0 5px;
+    margin: auto;
+}
+
+.logTitleStyle {
+    font-family: Times New Roman;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 70px;
+    color: black;
+}
+
+.logFirstColumnStyle {
+    text-align: center;
+    font-weight: bold;
+}
+
+.logSecondColumnStyle {
+    text-align: center;
+}

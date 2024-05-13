@@ -1,0 +1,51 @@
+.pageStyleProfile {
+    text-align: center;
+    background-image: url('Background/image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerStyleProfile {
+    text-align: center;
+    background-color: white;
+    width: 450px;
+    height: 700px;
+    border-radius: 8px;
+}
+
+.formStyleProfile {
+    display: inline-block;
+    text-align: left;
+}
+
+.tableStyleProfile {
+    border-collapse: separate;
+    border-spacing: 0 7px;
+    margin: auto;
+}
+
+.titleStyleProfile {
+    font-family: Times New Roman;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 165px;
+    color: black;
+}
+
+.firstColumnStyleProfile {
+    text-align: left;
+    font-weight: bold;
+}
+
+.secondColumnStyleProfile {
+    text-align: center;
+}
+
+.profileImageContainer img {
+    width: 150px;
+    height: auto;
+}

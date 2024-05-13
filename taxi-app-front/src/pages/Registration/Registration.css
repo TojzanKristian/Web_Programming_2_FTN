@@ -1,0 +1,47 @@
+.regPageStyle {
+    text-align: center;
+    background-image: url('Background/image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.regContainerStyle {
+    text-align: center;
+    background-color: white;
+    margin-top: 50px;
+    width: 450px;
+    height: 675px;
+    border-radius: 8px;
+}
+
+.regFormStyle {
+    display: inline-block;
+    text-align: left;
+}
+
+.regTableStyle {
+    border-collapse: separate;
+    border-spacing: 0 7px;
+    margin: auto;
+}
+
+.regTitleStyle {
+    font-family: Times New Roman;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 120px;
+    color: black;
+}
+
+.regFirstColumnStyle {
+    text-align: left;
+    font-weight: bold;
+}
+
+.regSecondColumnStyle {
+    text-align: center;
+}
