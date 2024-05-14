@@ -10,6 +10,7 @@ import ControlPanelDriver from './pages/Control panel/ControlPanelDriver';
 import PreviousTrips from './pages/Previous trips/PreviousTrips';
 import AllTrips from './pages/All trips/AllTrips';
 import MyTrips from './pages/My trips/MyTrips';
+import NewTrip from './pages/New trip/NewTrip';
 import { gapi } from 'gapi-script';
 
 const App: React.FC = () => {
@@ -40,6 +41,7 @@ const App: React.FC = () => {
         <Route path="/previous-trips" element={<PreviousTrips />} />
         <Route path="/my-trips" element={<MyTrips />} />
         <Route path="/all-trips" element={<AllTrips />} />
+        <Route path="/new-trip" element={<NewTrip />} />
       </Routes>
     </Router>
   );

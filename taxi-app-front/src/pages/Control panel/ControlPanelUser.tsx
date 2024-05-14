@@ -21,7 +21,7 @@ const ControlPanelUser: React.FC = () => {
     }
 
     const openNewTripPage = async () => {
-        //redirect('/profile')
+        redirect('/new-trip');
     }
 
     const openPreviousTripsPage = async () => {
