@@ -7,11 +7,17 @@
 ## Some useful links and resources that I used
   * _React with TypeScript_ tutorial:
     * https://www.youtube.com/watch?v=FJDVKeh7RJI
+  * _Azure Service Fabric_ tutorial:
+    * https://rb.gy/zp8lf5
   * _Azure Service Fabric_ Explorer:
     * http://localhost:19080/Explorer/index.html#/
   * Creating a database migration:
     * https://www.youtube.com/watch?v=ZX12X-ALwGA
   * _Bootstrap_:
     * https://getbootstrap.com/docs/5.3/getting-started/introduction/
+  * Notification via email:
+    * https://www.youtube.com/watch?v=lk5dhDzfzsU
+  * The usage of JWT token:
+    * https://shorturl.at/bcKLX
   * _ChatGPT_:
-  * https://openai.com/blog/chatgpt
+    * https://openai.com/blog/chatgpt
