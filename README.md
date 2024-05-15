@@ -1,6 +1,19 @@
 # Web_Programming_2_FTN
 
 ## The brief explanation of the taxi app's functionality
+This is an application that simulates a taxi service.<br/>
+The app has three types of users: admin, user, and driver.<br/>
+During registration, users can choose their role in the system (user or driver).<br/>
+After registration and login, users see three options: profile, new trip and previous trips.<br/>
+After registration and login, drivers also see three options: profile, new trips and my trips.<br/>
+Admin is predefined and cannot be chosen during registration, but they also see three options:<br/>
+profile, verification and all trips in the system.<br/>
+A user can create a new trip by entering the start and end points, and based on this information,<br/>
+they receive the price and time required for the journey. If they agree, a new trip is created.<br/>
+This new trip is visible to drivers on the new trips page, and a driver can accept one of the existing trips.<br/>
+Users have access to their previous trips, as well as drivers.
+Admin verifies drivers who can only accept trips after verification.<br/>
+Admin also have access to all trips in the system and their status.
 
 ## Pages short description
 **Login page** - the page where the user can sign in with their email and password.<br/>
