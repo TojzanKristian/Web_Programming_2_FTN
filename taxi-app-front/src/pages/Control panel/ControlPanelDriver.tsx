@@ -21,7 +21,7 @@ const ControlPanelDriver: React.FC = () => {
     }
 
     const openNewTripsPage = async () => {
-        //redirect('/verification');
+        redirect('/new-trips');
     }
 
     const openMyTripsPage = async () => {
