@@ -1,0 +1,46 @@
+.newTripPageStyle {
+    text-align: center;
+    background-image: url('Background/image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newTripContainerStyle {
+    text-align: center;
+    background-color: white;
+    margin-top: 50px;
+    width: 350px;
+    height: 200px;
+    border-radius: 8px;
+}
+
+.newTripFormStyle {
+    display: inline-block;
+    text-align: left;
+}
+
+.newTripTableStyle {
+    border-collapse: separate;
+    border-spacing: 0 7px;
+    margin: auto;
+}
+
+.newTripTitleStyle {
+    font-family: Times New Roman;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 60px;
+    color: black;
+}
+
+.newTripFirstColumnStyle {
+    font-weight: bold;
+}
+
+.newTripSecondColumnStyle {
+    text-align: center;
+}
