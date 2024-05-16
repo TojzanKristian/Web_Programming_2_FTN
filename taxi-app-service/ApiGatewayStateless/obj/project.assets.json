@@ -6298,11 +6298,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\krist\\source\\repos\\TaxiApp\\ApiGatewayStateless\\ApiGatewayStateless.csproj",
+      "projectUniqueName": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\ApiGatewayStateless\\ApiGatewayStateless.csproj",
       "projectName": "ApiGatewayStateless",
-      "projectPath": "C:\\Users\\krist\\source\\repos\\TaxiApp\\ApiGatewayStateless\\ApiGatewayStateless.csproj",
+      "projectPath": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\ApiGatewayStateless\\ApiGatewayStateless.csproj",
       "packagesPath": "C:\\Users\\krist\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\krist\\source\\repos\\TaxiApp\\ApiGatewayStateless\\obj\\",
+      "outputPath": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\ApiGatewayStateless\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\krist\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6321,8 +6321,8 @@
         "netcoreapp3.0": {
           "targetAlias": "netcoreapp3.0",
           "projectReferences": {
-            "C:\\Users\\krist\\source\\repos\\TaxiApp\\Common\\Common.csproj": {
-              "projectPath": "C:\\Users\\krist\\source\\repos\\TaxiApp\\Common\\Common.csproj"
+            "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\Common\\Common.csproj": {
+              "projectPath": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\Common\\Common.csproj"
             }
           }
         }

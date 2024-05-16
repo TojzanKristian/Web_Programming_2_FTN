@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GF6xfHcsXGOREQyg71ES/ueSI0WGIDmynhE6xmbxLW4wvADzHCWlhbE4w5aaaMKMtjEgERQOrFHIZ2CgIs2SJQ==",
+  "dgSpecHash": "fybpqkMcXPJjJiYuAPjnCHMwkmdy2iWU1V6HTrpTV2cx8izT0HKmeYjze5Wjr8iN4bUr0NpYOwGQ+gBGy6F2zw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\krist\\source\\repos\\TaxiApp\\WebService\\WebService.csproj",
+  "projectFilePath": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\WebService\\WebService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\krist\\.nuget\\packages\\entityframework\\6.1.0\\entityframework.6.1.0.nupkg.sha512",
     "C:\\Users\\krist\\.nuget\\packages\\libuv\\1.9.0\\libuv.1.9.0.nupkg.sha512",

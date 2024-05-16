@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RhDdTYjnO5aJWyf7WvCFsN48PvYsIJzaZ1Szcda2GgySA80zmYZ65vcNirl1bssy2kWLTIKQPuro7qip0sUfpQ==",
+  "dgSpecHash": "bvCOlnUxP6irBO/3RI/Yrdt8zA3hW+JvAr5ddYRPumeIScJZPoUnFG68ambEHRcSelnXKudBEhiDBqg6VSoN5A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\krist\\source\\repos\\TaxiApp\\UserService\\UserService.csproj",
+  "projectFilePath": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\UserService\\UserService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\krist\\.nuget\\packages\\entityframework\\6.1.0\\entityframework.6.1.0.nupkg.sha512",
     "C:\\Users\\krist\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.0.0\\microsoft.aspnet.identity.core.2.0.0.nupkg.sha512",

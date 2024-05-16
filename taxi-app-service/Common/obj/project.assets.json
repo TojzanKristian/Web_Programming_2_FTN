@@ -4411,11 +4411,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\krist\\source\\repos\\TaxiApp\\Common\\Common.csproj",
+      "projectUniqueName": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\Common\\Common.csproj",
       "projectName": "Common",
-      "projectPath": "C:\\Users\\krist\\source\\repos\\TaxiApp\\Common\\Common.csproj",
+      "projectPath": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\Common\\Common.csproj",
       "packagesPath": "C:\\Users\\krist\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\krist\\source\\repos\\TaxiApp\\Common\\obj\\",
+      "outputPath": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\Common\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\krist\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\krist\\source\\repos\\TaxiApp\\UserService\\UserService.csproj": {}
+    "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\UserService\\UserService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\krist\\source\\repos\\TaxiApp\\Common\\Common.csproj": {
+    "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\krist\\source\\repos\\TaxiApp\\Common\\Common.csproj",
+        "projectUniqueName": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "C:\\Users\\krist\\source\\repos\\TaxiApp\\Common\\Common.csproj",
+        "projectPath": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\Common\\Common.csproj",
         "packagesPath": "C:\\Users\\krist\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\krist\\source\\repos\\TaxiApp\\Common\\obj\\",
+        "outputPath": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\krist\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -81,14 +81,14 @@
         }
       }
     },
-    "C:\\Users\\krist\\source\\repos\\TaxiApp\\UserService\\UserService.csproj": {
+    "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\UserService\\UserService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\krist\\source\\repos\\TaxiApp\\UserService\\UserService.csproj",
+        "projectUniqueName": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\UserService\\UserService.csproj",
         "projectName": "UserService",
-        "projectPath": "C:\\Users\\krist\\source\\repos\\TaxiApp\\UserService\\UserService.csproj",
+        "projectPath": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\UserService\\UserService.csproj",
         "packagesPath": "C:\\Users\\krist\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\krist\\source\\repos\\TaxiApp\\UserService\\obj\\",
+        "outputPath": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\UserService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\krist\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -107,8 +107,8 @@
           "netcoreapp3.0": {
             "targetAlias": "netcoreapp3.0",
             "projectReferences": {
-              "C:\\Users\\krist\\source\\repos\\TaxiApp\\Common\\Common.csproj": {
-                "projectPath": "C:\\Users\\krist\\source\\repos\\TaxiApp\\Common\\Common.csproj"
+              "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\krist\\OneDrive\\Dokumentumok\\GitHub\\Web_Programming_2_FTN\\taxi-app-service\\Common\\Common.csproj"
               }
             }
           }

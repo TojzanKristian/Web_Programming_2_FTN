@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using UserService.Database;
+using UserService.Notification_via_email;
 
 namespace UserService
 {
@@ -21,6 +22,7 @@ namespace UserService
     internal sealed class UserService : StatefulService, IUserService
     {
         private readonly TypesOfUsers types = new TypesOfUsers();
+        private readonly EmailSender emailSender = new EmailSender();
 
         public UserService(StatefulServiceContext context)
             : base(context)
@@ -340,6 +342,7 @@ namespace UserService
                     {
                         user.State = profileState;
                         await dbContext.SaveChangesAsync();
+                        emailSender.SendEmail("drsprojekat2023@gmail.com", "Obaveštenje o izmeni statusa vašeg profila", "Admin je odobrio vaš profil!");
                         Debug.WriteLine($"Podaci su uspešno ažurirani u bazi podataka!");
                         return "1";
                     }
@@ -372,6 +375,7 @@ namespace UserService
                     {
                         user.State = profileState;
                         await dbContext.SaveChangesAsync();
+                        emailSender.SendEmail("drsprojekat2023@gmail.com", "Obaveštenje o izmeni statusa vašeg profila", "Admin je odbio vaš profil!");
                         Debug.WriteLine($"Podaci su uspešno ažurirani u bazi podataka!");
                         return "1";
                     }
