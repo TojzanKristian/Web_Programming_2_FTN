@@ -22,6 +22,62 @@ class NewTripService {
             throw new Error('Došlo je do greške: ' + (error as AxiosError).message);
         }
     }
+
+    async getActiceTrips() {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`${SERVER_URL}/trips/getActiveTrips`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            throw new Error('Došlo je do greške: ' + (error as AxiosError).message);
+        }
+    }
+
+    async getMyTrips() {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`${SERVER_URL}/trips/getMyTrips`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            throw new Error('Došlo je do greške: ' + (error as AxiosError).message);
+        }
+    }
+
+    async getAllTrips() {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`${SERVER_URL}/trips/getAllTrips`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            throw new Error('Došlo je do greške: ' + (error as AxiosError).message);
+        }
+    }
+
+    async getPassengersTrips() {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`${SERVER_URL}/trips/getPassengersTrips`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            throw new Error('Došlo je do greške: ' + (error as AxiosError).message);
+        }
+    }
 }
 
 export default new NewTripService();
