@@ -48,10 +48,20 @@ namespace UserService
 
             await Task.Yield();
 
-            var dbContext = CreateMyDbContext.CreateDbContext();
+            var dbContextUsers = CreateMyDbContextUsers.CreateDbContext();
             try
             {
-                await dbContext.Database.MigrateAsync();
+                await dbContextUsers.Database.MigrateAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Došlo je do greške tokom migracije: {ex.Message}");
+            }
+
+            var dbContextTrips = CreateMyDbContextTrips.CreateDbContext();
+            try
+            {
+                await dbContextTrips.Database.MigrateAsync();
             }
             catch (Exception ex)
             {
@@ -94,7 +104,7 @@ namespace UserService
             {
                 try
                 {
-                    var dbContext = CreateMyDbContext.CreateDbContext();
+                    var dbContext = CreateMyDbContextUsers.CreateDbContext();
                     try
                     {
                         var allUsers = dbContext.Users.ToList();
@@ -149,7 +159,7 @@ namespace UserService
             {
                 try
                 {
-                    var dbContext = CreateMyDbContext.CreateDbContext();
+                    var dbContext = CreateMyDbContextUsers.CreateDbContext();
                     try
                     {
                         var allUsers = dbContext.Users.ToList();
@@ -211,7 +221,7 @@ namespace UserService
             {
                 try
                 {
-                    var dbContext = CreateMyDbContext.CreateDbContext();
+                    var dbContext = CreateMyDbContextUsers.CreateDbContext();
                     var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
                     if (user != null)
                     {
@@ -265,7 +275,7 @@ namespace UserService
             {
                 try
                 {
-                    var dbContext = CreateMyDbContext.CreateDbContext();
+                    var dbContext = CreateMyDbContextUsers.CreateDbContext();
                     var existingUser = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == currentUser.Email);
                     if (existingUser != null)
                     {
@@ -309,7 +319,7 @@ namespace UserService
 
             try
             {
-                var dbContext = CreateMyDbContext.CreateDbContext();
+                var dbContext = CreateMyDbContextUsers.CreateDbContext();
                 var allUsers = dbContext.Users.ToList();
                 if (allUsers.Count != 0)
                 {
@@ -336,7 +346,7 @@ namespace UserService
             {
                 try
                 {
-                    var dbContext = CreateMyDbContext.CreateDbContext();
+                    var dbContext = CreateMyDbContextUsers.CreateDbContext();
                     var user = await dbContext.Users.FirstOrDefaultAsync(u => u.UserName == userName);
                     if (user != null)
                     {
@@ -369,7 +379,7 @@ namespace UserService
             {
                 try
                 {
-                    var dbContext = CreateMyDbContext.CreateDbContext();
+                    var dbContext = CreateMyDbContextUsers.CreateDbContext();
                     var user = await dbContext.Users.FirstOrDefaultAsync(u => u.UserName == userName);
                     if (user != null)
                     {

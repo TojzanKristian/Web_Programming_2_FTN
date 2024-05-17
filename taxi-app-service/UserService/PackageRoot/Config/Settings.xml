@@ -13,7 +13,10 @@
     <Parameter Name="MyParameter" Value="Value1" />
   </Section>
   -->
-	<Section Name="ConnectionStrings">
+	<Section Name="ConnectionStringsUsers">
 		<Parameter Name="YourConnectionString" Value="Server=KRISZTIAN\SQLEXPRESS;Database=TaxiAppUsers;Trusted_Connection=True;" />
+	</Section>
+	<Section Name="ConnectionStringsTrips">
+		<Parameter Name="YourConnectionString" Value="Server=KRISZTIAN\SQLEXPRESS;Database=TaxiAppTrips;Trusted_Connection=True;" />
 	</Section>
 </Settings>

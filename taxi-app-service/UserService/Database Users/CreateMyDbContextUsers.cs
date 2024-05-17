@@ -3,12 +3,12 @@ using System.Fabric;
 
 namespace UserService.Database
 {
-    class CreateMyDbContext
+    public class CreateMyDbContextUsers
     {
         public static UsersDbContext CreateDbContext()
         {
             var configurationPackage = FabricRuntime.GetActivationContext().GetConfigurationPackageObject("Config");
-            var connectionStringParameter = configurationPackage.Settings.Sections["ConnectionStrings"].Parameters["YourConnectionString"];
+            var connectionStringParameter = configurationPackage.Settings.Sections["ConnectionStringsUsers"].Parameters["YourConnectionString"];
             var connectionString = connectionStringParameter.Value;
 
             var dbContextOptions = new DbContextOptionsBuilder<UsersDbContext>()
