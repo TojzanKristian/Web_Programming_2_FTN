@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { titleStyleMT, tableStyleMT, tdStyleMT } from './MyTripsCSS'
+import NewTripService from '../../services/New trip/NewTripService';
 
 const MyTrips: React.FC = () => {
 
     const redirection = useNavigate();
+    const [trips, setTrips] = useState<any[]>([]);
 
     // Funkcija za zaštitu stranice
     useEffect(() => {
@@ -16,9 +18,24 @@ const MyTrips: React.FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Funkcija za prijem mojih prethodnih vožnji sa servera
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await NewTripService.getMyTrips();
+                setTrips(response);
+            } catch (error) {
+                console.error('Došlo je do greške: ', error);
+            }
+        };
+
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <div>
-            <h3 style={titleStyleMT}>Vaše prethodne vožnje</h3>
+            <h1 style={titleStyleMT}>Vaše prethodne vožnje</h1>
             <table className="table table-dark table-hover" style={tableStyleMT}>
                 <thead>
                     <tr>
@@ -26,102 +43,21 @@ const MyTrips: React.FC = () => {
                         <th scope="col">Putnik :</th>
                         <th scope="col">Početna adresa :</th>
                         <th scope="col">Krajnja adresa :</th>
-                        <th scope="col">Udaljenost (km) :</th>
                         <th scope="col">Vremensko trajanje (min) :</th>
                         <th scope="col">Cena (din) :</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td style={tdStyleMT}>User1</td>
-                        <td style={tdStyleMT}>Bulevar oslobođenja 25</td>
-                        <td style={tdStyleMT}>Bulevar Evrope 155</td>
-                        <td style={tdStyleMT}>5</td>
-                        <td style={tdStyleMT}>10</td>
-                        <td style={tdStyleMT}>250</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td style={tdStyleMT}>User1</td>
-                        <td style={tdStyleMT}>Bulevar oslobođenja 25</td>
-                        <td style={tdStyleMT}>Bulevar Evrope 155</td>
-                        <td style={tdStyleMT}>5</td>
-                        <td style={tdStyleMT}>10</td>
-                        <td style={tdStyleMT}>250</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td style={tdStyleMT}>User1</td>
-                        <td style={tdStyleMT}>Bulevar oslobođenja 25</td>
-                        <td style={tdStyleMT}>Bulevar Evrope 155</td>
-                        <td style={tdStyleMT}>5</td>
-                        <td style={tdStyleMT}>10</td>
-                        <td style={tdStyleMT}>250</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td style={tdStyleMT}>User1</td>
-                        <td style={tdStyleMT}>Bulevar oslobođenja 25</td>
-                        <td style={tdStyleMT}>Bulevar Evrope 155</td>
-                        <td style={tdStyleMT}>5</td>
-                        <td style={tdStyleMT}>10</td>
-                        <td style={tdStyleMT}>250</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td style={tdStyleMT}>User1</td>
-                        <td style={tdStyleMT}>Bulevar oslobođenja 25</td>
-                        <td style={tdStyleMT}>Bulevar Evrope 155</td>
-                        <td style={tdStyleMT}>5</td>
-                        <td style={tdStyleMT}>10</td>
-                        <td style={tdStyleMT}>250</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td style={tdStyleMT}>User1</td>
-                        <td style={tdStyleMT}>Bulevar oslobođenja 25</td>
-                        <td style={tdStyleMT}>Bulevar Evrope 155</td>
-                        <td style={tdStyleMT}>5</td>
-                        <td style={tdStyleMT}>10</td>
-                        <td style={tdStyleMT}>250</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td style={tdStyleMT}>User1</td>
-                        <td style={tdStyleMT}>Bulevar oslobođenja 25</td>
-                        <td style={tdStyleMT}>Bulevar Evrope 155</td>
-                        <td style={tdStyleMT}>5</td>
-                        <td style={tdStyleMT}>10</td>
-                        <td style={tdStyleMT}>250</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td style={tdStyleMT}>User1</td>
-                        <td style={tdStyleMT}>Bulevar oslobođenja 25</td>
-                        <td style={tdStyleMT}>Bulevar Evrope 155</td>
-                        <td style={tdStyleMT}>5</td>
-                        <td style={tdStyleMT}>10</td>
-                        <td style={tdStyleMT}>250</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td style={tdStyleMT}>User1</td>
-                        <td style={tdStyleMT}>Bulevar oslobođenja 25</td>
-                        <td style={tdStyleMT}>Bulevar Evrope 155</td>
-                        <td style={tdStyleMT}>5</td>
-                        <td style={tdStyleMT}>10</td>
-                        <td style={tdStyleMT}>250</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td style={tdStyleMT}>User1</td>
-                        <td style={tdStyleMT}>Bulevar oslobođenja 25</td>
-                        <td style={tdStyleMT}>Bulevar Evrope 155</td>
-                        <td style={tdStyleMT}>5</td>
-                        <td style={tdStyleMT}>10</td>
-                        <td style={tdStyleMT}>250</td>
-                    </tr>
+                    {trips.map((trip, index) => (
+                        <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td style={tdStyleMT}>{trip.passenger}</td>
+                            <td style={tdStyleMT}>{trip.startingAddress}</td>
+                            <td style={tdStyleMT}>{trip.finalAddress}</td>
+                            <td style={tdStyleMT}>{trip.durationOfTheTrip.replace('min', '')}</td>
+                            <td style={tdStyleMT}>{trip.priceOfTheTrip.replace('din', '')}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
