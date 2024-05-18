@@ -78,6 +78,23 @@ class NewTripService {
             throw new Error('Došlo je do greške: ' + (error as AxiosError).message);
         }
     }
+
+    async acceptanceOfTrip(trip: any) {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.put(`${SERVER_URL}/trips/acceptTheTrip`, {
+                id: trip.id,
+                state: "Aktivan"
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            throw new Error('Došlo je do greške: ' + (error as AxiosError).message);
+        }
+    }
 }
 
 export default new NewTripService();
