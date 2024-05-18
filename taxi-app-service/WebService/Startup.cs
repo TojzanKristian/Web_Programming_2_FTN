@@ -1,3 +1,4 @@
+using AutoMapper;
 using Common.Encryption;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Fabric;
+using WebService.Mappings;
 
 namespace WebService
 {
@@ -27,6 +29,14 @@ namespace WebService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<UserProfile>();
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddCors(options =>
             {

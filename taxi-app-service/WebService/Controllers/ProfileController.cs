@@ -1,4 +1,5 @@
-﻿using Common.Encryption;
+﻿using AutoMapper;
+using Common.Encryption;
 using Common.ImagePathConverter;
 using Common.Interfaces;
 using Common.Models;
@@ -10,6 +11,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using WebService.Dto;
 
 namespace WebService.Controllers
 {
@@ -18,15 +20,17 @@ namespace WebService.Controllers
     public class ProfileController : Controller
     {
         private readonly ILogger<ProfileController> _logger;
+        private readonly IMapper _mapper;
         private readonly SHA256Encryption encryption = new SHA256Encryption();
         private readonly PathConverter imagePathConverter = new PathConverter();
         private readonly TypesOfUsers types = new TypesOfUsers();
         private readonly JwtConfiguration jwtConfig = new JwtConfiguration();
         private readonly IApiGateway _proxy = ServiceProxy.Create<IApiGateway>(new Uri("fabric:/TaxiApp/ApiGatewayStateless"));
 
-        public ProfileController(ILogger<ProfileController> logger)
+        public ProfileController(ILogger<ProfileController> logger, IMapper mapper)
         {
             _logger = logger;
+            _mapper = mapper;
         }
 
         // GET, za dobavljanje podataka o korisniku
@@ -41,19 +45,7 @@ namespace WebService.Controllers
                     User loggedIn = MySession.data.FirstOrDefault(x => x.Key.Equals(token)).Value;
                     if (loggedIn != null)
                     {
-                        var data = new RegistrationRequest
-                        {
-                            UserName = loggedIn.UserName,
-                            Email = loggedIn.Email,
-                            Password = loggedIn.Password,
-                            FirstName = loggedIn.FirstName,
-                            LastName = loggedIn.LastName,
-                            DateOfBirth = loggedIn.DateOfBirth,
-                            Address = loggedIn.Address,
-                            UserType = loggedIn.UserType,
-                            State = loggedIn.State,
-                            Image = loggedIn.Image
-                        };
+                        UserDto data = _mapper.Map<UserDto>(loggedIn);
                         Debug.WriteLine($"Poslati su podaci:\nUsername: {data.UserName}, Email: {data.Email}, Password: {data.Password}, FirstName: {data.FirstName}, LastName: {data.LastName}, DateOfBirth: {data.DateOfBirth}, Address: {data.Address}, UserType: {data.UserType}, Stanje: {data.State}, Image: {data.Image}");
                         _logger.LogInformation($"Poslati su podaci:\nUsername: {data.UserName}, Email: {data.Email}, Password: {data.Password}, FirstName: {data.FirstName}, LastName: {data.LastName}, DateOfBirth: {data.DateOfBirth}, Address: {data.Address}, UserType: {data.UserType}, Stanje: {data.State}, Image: {data.Image}");
                         return Ok(data);

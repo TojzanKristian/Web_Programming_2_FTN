@@ -1,4 +1,5 @@
-﻿using Common.Interfaces;
+﻿using AutoMapper;
+using Common.Interfaces;
 using Common.Models;
 using Common.Requests;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using WebService.Dto;
 
 namespace WebService.Controllers
 {
@@ -16,11 +18,13 @@ namespace WebService.Controllers
     public class VerificationController : Controller
     {
         private readonly ILogger<VerificationController> _logger;
+        private readonly IMapper _mapper;
         private readonly IApiGateway _proxy = ServiceProxy.Create<IApiGateway>(new Uri("fabric:/TaxiApp/ApiGatewayStateless"));
 
-        public VerificationController(ILogger<VerificationController> logger)
+        public VerificationController(ILogger<VerificationController> logger, IMapper mapper)
         {
             _logger = logger;
+            _mapper = mapper;
         }
 
         // GET, za dobavljanje podataka o korisnicima koji trebaju da se verifikuju od strane admina
@@ -32,16 +36,16 @@ namespace WebService.Controllers
                 List<User> usersToVerify = await _proxy.GetUsersToVerifyAsync();
                 if (usersToVerify.Count != 0 && usersToVerify != null)
                 {
-                    var data = usersToVerify;
+                    var data = _mapper.Map<List<UserDto>>(usersToVerify);
                     Debug.WriteLine($"Poslati su podaci:\n");
                     foreach (var user in data)
                     {
-                        Debug.WriteLine($"Id: {user.Id}, Korisničko ime: {user.UserName}, Email: {user.Email}, Lozinka: {user.Password}, Ime: {user.FirstName}, Prezime: {user.LastName}, Datum rođenja: {user.DateOfBirth}, Adresa: {user.Address}, Tip korisnika: {user.UserType}, Status: {user.State}, Slika: {user.Image}");
+                        Debug.WriteLine($"Korisničko ime: {user.UserName}, Email: {user.Email}, Lozinka: {user.Password}, Ime: {user.FirstName}, Prezime: {user.LastName}, Datum rođenja: {user.DateOfBirth}, Adresa: {user.Address}, Tip korisnika: {user.UserType}, Status: {user.State}, Slika: {user.Image}");
                     }
                     _logger.LogInformation($"Poslati su podaci:\n");
                     foreach (var user in data)
                     {
-                        _logger.LogInformation($"Id: {user.Id}, Korisničko ime: {user.UserName}, Email: {user.Email}, Lozinka: {user.Password}, Ime: {user.FirstName}, Prezime: {user.LastName}, Datum rođenja: {user.DateOfBirth}, Adresa: {user.Address}, Tip korisnika: {user.UserType}, Status: {user.State}, Slika: {user.Image}");
+                        _logger.LogInformation($"Korisničko ime: {user.UserName}, Email: {user.Email}, Lozinka: {user.Password}, Ime: {user.FirstName}, Prezime: {user.LastName}, Datum rođenja: {user.DateOfBirth}, Adresa: {user.Address}, Tip korisnika: {user.UserType}, Status: {user.State}, Slika: {user.Image}");
                     }
                     return Ok(data);
                 }
