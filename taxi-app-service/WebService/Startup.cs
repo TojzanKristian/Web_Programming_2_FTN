@@ -33,6 +33,7 @@ namespace WebService
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<UserProfile>();
+                cfg.AddProfile<TripProfile>();
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
