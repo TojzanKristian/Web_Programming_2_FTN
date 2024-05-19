@@ -40,6 +40,27 @@ namespace ApiGatewayStateless
         public async Task<string> RejectProfileAsync(string userName, string profileState)
             => await _userProxy.RejectProfileAsync(userName, profileState);
 
+        public async Task<(string, Trip)> AddNewTripAsync(Trip newTrip)
+           => await _userProxy.AddNewTripAsync(newTrip);
+
+        public async Task<List<Trip>> GetActiveTripsAsync()
+            => await _userProxy.GetActiveTripsAsync();
+
+        public async Task<List<Trip>> GetDriversPreviousTripsAsync(string userName)
+            => await _userProxy.GetDriversPreviousTripsAsync(userName);
+
+        public async Task<List<Trip>> GetAllTripsAsync()
+            => await _userProxy.GetAllTripsAsync();
+
+        public async Task<List<Trip>> GetPassengersTripsAsync(string userName)
+            => await _userProxy.GetPassengersTripsAsync(userName);
+
+        public async Task<Trip> DriverAcceptedTheTripAsync(int id, string state, string driver)
+            => await _userProxy.DriverAcceptedTheTripAsync(id, state, driver);
+
+        public async Task<string> TheTripIsFinishedAsync(int id, string state)
+            => await _userProxy.TheTripIsFinishedAsync(id, state);
+
         protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
             => this.CreateServiceRemotingInstanceListeners();
 
