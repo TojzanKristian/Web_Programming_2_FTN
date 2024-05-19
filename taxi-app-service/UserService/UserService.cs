@@ -126,7 +126,11 @@ namespace UserService
                             dbContext.Users.Add(newUser);
                             await dbContext.SaveChangesAsync();
                         }
-                        dbContext.Users.Add(newUser);
+                        else
+                        {
+                            dbContext.Users.Add(newUser);
+                            await dbContext.SaveChangesAsync();
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -400,6 +404,261 @@ namespace UserService
             }
             Debug.WriteLine($"Greška! Korisnièko ime i status su prazni!");
             return "0";
+        }
+        #endregion
+
+        #region Add new trip
+        public async Task<(string, Trip)> AddNewTripAsync(Trip newTrip)
+        {
+            await Task.Yield();
+
+            if (newTrip != null)
+            {
+                try
+                {
+                    var dbContext = CreateMyDbContextTrips.CreateDbContext();
+                    try
+                    {
+                        var allTrips = dbContext.Trips.ToList();
+                        if (allTrips.Count != 0)
+                        {
+                            foreach (var trip in allTrips)
+                            {
+                                if (trip.Id.Equals(newTrip.Id))
+                                {
+                                    Debug.WriteLine($"Veæ postoji vožnja u bazi podataka!");
+                                    return ("-1", null);
+                                }
+                            }
+                            dbContext.Trips.Add(newTrip);
+                            await dbContext.SaveChangesAsync();
+                        }
+                        else
+                        {
+                            dbContext.Trips.Add(newTrip);
+                            await dbContext.SaveChangesAsync();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Došlo je do greške tokom migracije: {ex.Message}");
+                        return ("0", null);
+                    }
+                    Debug.WriteLine($"Vožnja je uspešno dodata u bazu podataka!");
+                    return ("1", newTrip);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Došlo je do greške tokom registracije: {ex.Message}");
+                    return ("0", null);
+                }
+            }
+            else
+            {
+                Debug.WriteLine($"Došlo je do greške, nova vožnja nema vrednost!");
+                return ("0", null);
+            }
+        }
+        #endregion
+
+        #region Get all active trips
+        public async Task<List<Trip>> GetActiveTripsAsync()
+        {
+            await Task.Yield();
+
+            try
+            {
+                var dbContext = CreateMyDbContextTrips.CreateDbContext();
+                var allTrips = dbContext.Trips.ToList();
+                List<Trip> returnList = new List<Trip>();
+                if (allTrips.Count != 0)
+                {
+                    foreach (var trip in allTrips)
+                    {
+                        if (trip.State.Equals("Èeka"))
+                        {
+                            returnList.Add(trip);
+                        }
+                    }
+                    Debug.WriteLine($"Uspešno su proèitane vožnje iz baze podataka i poslati su!");
+                    return returnList;
+                }
+                Debug.WriteLine($"Nema korisnika u bazi podataka!");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Došlo je do greške tokom registracije: {ex.Message}");
+                return null;
+            }
+        }
+        #endregion
+
+        #region Get previous trips for driver
+        public async Task<List<Trip>> GetDriversPreviousTripsAsync(string userName)
+        {
+            await Task.Yield();
+
+            try
+            {
+                var dbContext = CreateMyDbContextTrips.CreateDbContext();
+                var allTrips = dbContext.Trips.ToList();
+                List<Trip> returnList = new List<Trip>();
+                if (allTrips.Count != 0)
+                {
+                    foreach (var trip in allTrips)
+                    {
+                        if (trip.Driver.Equals(userName) && trip.State.Equals("Završen"))
+                        {
+                            returnList.Add(trip);
+                        }
+                    }
+                    Debug.WriteLine($"Uspešno su proèitane vožnje iz baze podataka i poslati su!");
+                    return returnList;
+                }
+                Debug.WriteLine($"Nema korisnika u bazi podataka!");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Došlo je do greške tokom registracije: {ex.Message}");
+                return null;
+            }
+        }
+        #endregion
+
+        #region Get all trips
+        public async Task<List<Trip>> GetAllTripsAsync()
+        {
+            await Task.Yield();
+
+            try
+            {
+                var dbContext = CreateMyDbContextTrips.CreateDbContext();
+                var allTrips = dbContext.Trips.ToList();
+                if (allTrips.Count != 0)
+                {
+                    Debug.WriteLine($"Uspešno su proèitane vožnje iz baze podataka i poslati su!");
+                    return allTrips;
+                }
+                Debug.WriteLine($"Nema korisnika u bazi podataka!");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Došlo je do greške tokom registracije: {ex.Message}");
+                return null;
+            }
+        }
+        #endregion
+
+        #region Get passangers trips
+        public async Task<List<Trip>> GetPassengersTripsAsync(string userName)
+        {
+            await Task.Yield();
+
+            try
+            {
+                var dbContext = CreateMyDbContextTrips.CreateDbContext();
+                var allTrips = dbContext.Trips.ToList();
+                List<Trip> returnList = new List<Trip>();
+                if (allTrips.Count != 0)
+                {
+                    foreach (var trip in allTrips)
+                    {
+                        if (trip.Passenger.Equals(userName))
+                        {
+                            returnList.Add(trip);
+                        }
+                    }
+                    Debug.WriteLine($"Uspešno su proèitane vožnje iz baze podataka i poslati su!");
+                    return returnList;
+                }
+                Debug.WriteLine($"Nema korisnika u bazi podataka!");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Došlo je do greške tokom registracije: {ex.Message}");
+                return null;
+            }
+        }
+        #endregion
+
+        #region Accepted trip
+        public async Task<Trip> DriverAcceptedTheTripAsync(int id, string state, string driver)
+        {
+            await Task.Yield();
+
+            if (id > 0 && state != null && driver != null)
+            {
+                try
+                {
+                    var dbContext = CreateMyDbContextTrips.CreateDbContext();
+                    var existingTrip = await dbContext.Trips.FirstOrDefaultAsync(t => t.Id == id);
+                    if (existingTrip != null)
+                    {
+                        existingTrip.Driver = driver;
+                        existingTrip.State = state;
+                        await dbContext.SaveChangesAsync();
+                        Debug.WriteLine($"Podaci su uspešno ažurirani u bazi podataka!");
+                        return existingTrip;
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"Došlo je do greške tokom èitanja korisnika iz baze!");
+                        return null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Došlo je do greške tokom migracije: {ex.Message}");
+                    return null;
+                }
+            }
+            else
+            {
+                Debug.WriteLine($"Došlo je do greške, id, status ili vozaè nemaju vrednost!");
+                return null;
+            }
+        }
+        #endregion
+
+        #region The trip is finished
+        public async Task<string> TheTripIsFinishedAsync(int id, string state)
+        {
+            await Task.Yield();
+
+            if (id > 0 && state != null)
+            {
+                try
+                {
+                    var dbContext = CreateMyDbContextTrips.CreateDbContext();
+                    var existingTrip = await dbContext.Trips.FirstOrDefaultAsync(t => t.Id == id);
+                    if (existingTrip != null)
+                    {
+                        existingTrip.State = state;
+                        await dbContext.SaveChangesAsync();
+                        Debug.WriteLine($"Podaci su uspešno ažurirani u bazi podataka!");
+                        return "1";
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"Došlo je do greške tokom èitanja korisnika iz baze!");
+                        return "0";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Došlo je do greške tokom migracije: {ex.Message}");
+                    return "0";
+                }
+            }
+            else
+            {
+                Debug.WriteLine($"Došlo je do greške, id, status ili vozaè nemaju vrednost!");
+                return "0";
+            }
         }
         #endregion
     }
