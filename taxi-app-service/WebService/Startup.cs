@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Fabric;
+using WebService.Hubs;
 using WebService.Mappings;
 
 namespace WebService
@@ -29,6 +30,7 @@ namespace WebService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSignalR();
 
             var mapperConfig = new MapperConfiguration(cfg =>
             {
@@ -49,6 +51,7 @@ namespace WebService
                                       .WithExposedHeaders("Content-Type"));
             });
 
+
             jwtConfig.ConfigureJwtAuthentication(services);
         }
 
@@ -67,6 +70,7 @@ namespace WebService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<TripHub>("/new-trip");
             });
         }
     }
