@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { titleStyleNT, tableStyleNT, tdStyleNT } from './NewTripsCSS'
-import NewTripService from '../../services/New trip/NewTripService';
+import TripService from '../../services/Trip/TripService';
 import CountdownTimerModal from '../components/Countdown timer/CountdownTimerModal';
 
 const NewTrips: React.FC = () => {
 
     const redirection = useNavigate();
     const [trips, setTrips] = useState<any[]>([]);
-    const [startTimer, setStartTimer] = useState(false);
     const [timerDuration, setTimerDuration] = useState(0);
     const [showTimerModal, setShowTimerModal] = useState(false);
 
@@ -26,7 +25,7 @@ const NewTrips: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await NewTripService.getActiceTrips();
+                const response = await TripService.getActiceTrips();
                 setTrips(response);
             } catch (error) {
                 console.error('Došlo je do greške: ', error);
@@ -43,23 +42,29 @@ const NewTrips: React.FC = () => {
 
     const takeTheTrip = async (trip: any) => {
         try {
-            const response = await NewTripService.acceptanceOfTrip(trip);
+            const response = await TripService.acceptanceOfTrip(trip);
             console.log(response)
+            if (response.message === "1") {
+                const timeForTheTaxiToArriveNumber = parseFloat(response.timeForTheTaxiToArrive);
+                const timeForTheTaxiToArriveInt = Math.round(timeForTheTaxiToArriveNumber);
+                const durationInMinutes = parseInt(trip.durationOfTheTrip.replace('min', ''));
+                setTimerDuration(timeForTheTaxiToArriveInt + durationInMinutes);
+                setShowTimerModal(true);
 
-            const tripDataString = localStorage.getItem('tripData');
-            if (tripDataString) {
-                const tripData = JSON.parse(tripDataString);
-                tripData.state = 'Aktivan';
-                localStorage.setItem('tripData', JSON.stringify(tripData));
+                await wait(((timeForTheTaxiToArriveInt + durationInMinutes) * 60 * 1000) + 10000);
+                const result = await TripService.theTripHasEnded(trip);
+                if (result.message === "1") {
+                    alert('Vožnja je završena!');
+                    window.location.reload();
+                }
+                else {
+                    alert('Došlo je do greške!');
+                    window.location.reload();
+                }
             }
-
-            const durationInMinutes = parseInt(trip.durationOfTheTrip.replace('min', ''));
-            setTimerDuration(durationInMinutes);
-            setStartTimer(true);
-            setShowTimerModal(true);
-
-            await wait(durationInMinutes * 60 * 1000);
-            window.location.reload();
+            else {
+                alert('Došlo je do greške!');
+            }
         } catch (error) {
             console.error('Došlo je do greške: ', error);
         }

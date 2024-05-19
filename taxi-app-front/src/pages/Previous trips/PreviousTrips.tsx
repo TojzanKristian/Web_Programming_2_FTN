@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { titleStylePT, tableStylePT, tdStylePT } from './PreviousTripsCSS'
-import NewTripService from '../../services/New trip/NewTripService';
+import TripService from '../../services/Trip/TripService';
 
 const PreviousTrips: React.FC = () => {
 
@@ -22,7 +22,7 @@ const PreviousTrips: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await NewTripService.getPassengersTrips();
+                const response = await TripService.getPassengersTrips();
                 setTrips(response);
             } catch (error) {
                 console.error('Došlo je do greške: ', error);

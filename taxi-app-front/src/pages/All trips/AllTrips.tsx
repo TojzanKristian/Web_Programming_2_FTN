@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { titleStyleAT, tableStyleAT, tdStyleAT } from './AllTripsCSS'
-import NewTripService from '../../services/New trip/NewTripService';
+import TripService from '../../services/Trip/TripService';
 
 const AllTrips: React.FC = () => {
 
@@ -22,8 +22,8 @@ const AllTrips: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await NewTripService.getAllTrips();
-                setTrips(response); // Válasz beállítása a trips állapotba
+                const response = await TripService.getAllTrips();
+                setTrips(response);
             } catch (error) {
                 console.error('Došlo je do greške: ', error);
             }

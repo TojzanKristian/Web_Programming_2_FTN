@@ -2,7 +2,7 @@
 import axios, { AxiosError } from 'axios';
 const SERVER_URL = 'http://localhost:8986'
 
-class NewTripService {
+class TripService {
     async createNewTrip(startingAddress: any, finalAddress: any, priceOfTheTrip: any, timeForTheTaxiToArrive: any, durationOfTheTrip: any) {
         try {
             const token = localStorage.getItem('token');
@@ -95,6 +95,23 @@ class NewTripService {
             throw new Error('Došlo je do greške: ' + (error as AxiosError).message);
         }
     }
+
+    async theTripHasEnded(trip: any) {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.put(`${SERVER_URL}/trips/tripIsFinished`, {
+                id: trip.id,
+                state: "Završen"
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            throw new Error('Došlo je do greške: ' + (error as AxiosError).message);
+        }
+    }
 }
 
-export default new NewTripService();
+export default new TripService();
