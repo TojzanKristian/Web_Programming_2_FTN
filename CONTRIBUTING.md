@@ -13,11 +13,15 @@
     * http://localhost:19080/Explorer/index.html#/
   * Creating a database migration:
     * https://www.youtube.com/watch?v=ZX12X-ALwGA
+  * Dto and mapping with _AutoMapper_:
+    * https://www.youtube.com/watch?v=Ijw0Q5EOqmE
   * _Bootstrap_:
     * https://getbootstrap.com/docs/5.3/getting-started/introduction/
   * Notification via email:
     * https://www.youtube.com/watch?v=lk5dhDzfzsU
   * The usage of JWT token:
     * https://shorturl.at/bcKLX
+  * _SignalR_:
+    * https://www.youtube.com/watch?v=LEImpa77irI
   * _ChatGPT_:
     * https://openai.com/blog/chatgpt
