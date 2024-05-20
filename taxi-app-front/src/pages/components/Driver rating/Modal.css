@@ -1,0 +1,14 @@
+.rating-options {
+    display: flex;
+    justify-content: center;
+}
+
+.rating-options label {
+    margin: 15px;
+    font-size: 1.2em;
+}
+
+.rating-options input[type="radio"] {
+    margin-right: 5px;
+    transform: scale(1.1);
+}
