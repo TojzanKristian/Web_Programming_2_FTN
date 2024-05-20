@@ -1,0 +1,31 @@
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-group-item.special-title div:first-child {
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 3px solid black;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.list-group-item span:first-child {
+    align-self: flex-start;
+}
+
+.list-group-item span:last-child {
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+}
+
+.image {
+    width: 150px;
+    height: 50%;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
