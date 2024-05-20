@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { pageStyleCP, containerStyleCP, headerStyleCP } from './ControlPanelCSS';
+import { pageStyleCP, containerStyleCP, headerStyleCP, buttonsStyle } from './ControlPanelCSS';
 
 const ControlPanelAdmin: React.FC = () => {
 
@@ -22,6 +22,10 @@ const ControlPanelAdmin: React.FC = () => {
 
     const openVerificationPage = async () => {
         redirect('/verification');
+    }
+
+    const openRatingsPage = async () => {
+        redirect('/ratings');
     }
 
     const openAllTripsPage = async () => {
@@ -46,13 +50,16 @@ const ControlPanelAdmin: React.FC = () => {
             <div style={containerStyleCP}>
                 <div className="card text-center">
                     <div className="card-header" style={headerStyleCP}>
-                        Verifikacija
+                        Verifikacija / Ocene vozača
                     </div>
                     <div className="card-body">
                         {/* eslint-disable-next-line jsx-a11y/heading-has-content */}
                         <h5 className="card-title"></h5>
-                        <p className="card-text">Na ovoj stranici imate prikaz svih registrovanih vozača i možete da odobrite ili odbijete njihov nalog.</p>
-                        <button type="button" className="btn btn-primary" onClick={openVerificationPage}>Otvori</button>
+                        <p className="card-text">Na stranici za verifikaciju imate prikaz svih registrovanih korisnika i možete da odobrite ili odbijete nalog vozača. Na stranici za ocene vozača imate sve vozače i njihove prosečne ocene i možete da bolikrate nekog vozača.</p>
+                        <div style={buttonsStyle}>
+                            <button type="button" className="btn btn-primary" onClick={openVerificationPage}>Otvori Verifikaciju</button>
+                            <button type="button" className="btn btn-primary" onClick={openRatingsPage}>Otvori Ocene</button>
+                        </div>
                     </div>
                 </div>
             </div>

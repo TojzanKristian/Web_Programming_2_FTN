@@ -22,4 +22,10 @@ const headerStyleCP: React.CSSProperties = {
     fontSize: '20px'
 };
 
-export { pageStyleCP, containerStyleCP, headerStyleCP };
+const buttonsStyle: React.CSSProperties = {
+    marginLeft: '60px',
+    display: 'flex',
+    gap: '15px'
+}
+
+export { pageStyleCP, containerStyleCP, headerStyleCP, buttonsStyle };

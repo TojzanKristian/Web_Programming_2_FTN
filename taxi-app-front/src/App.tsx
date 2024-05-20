@@ -12,6 +12,7 @@ import AllTrips from './pages/All trips/AllTrips';
 import MyTrips from './pages/My trips/MyTrips';
 import NewTrip from './pages/New trip/NewTrip';
 import NewTrips from './pages/New trips/NewTrips';
+import Ratings from './pages/Ratings/Ratings';
 import { gapi } from 'gapi-script';
 
 const App: React.FC = () => {
@@ -44,6 +45,7 @@ const App: React.FC = () => {
         <Route path="/all-trips" element={<AllTrips />} />
         <Route path="/new-trip" element={<NewTrip />} />
         <Route path="/new-trips" element={<NewTrips />} />
+        <Route path="/ratings" element={<Ratings />} />
       </Routes>
     </Router>
   );
