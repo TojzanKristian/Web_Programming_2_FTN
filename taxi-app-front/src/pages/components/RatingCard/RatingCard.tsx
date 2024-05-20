@@ -1,19 +1,38 @@
 import { cardStyleRC, buttonStyleRC, buttonContainerStyleRC } from './RatingCardCSS';
 import './RatingCardCSS';
 import RatingService from "../../../services/Rating/RatingService";
+import { useState } from 'react';
 
 interface Props {
     rating: any;
 }
 
 const RatingCard: React.FC<Props> = ({ rating }) => {
+    const [blocked, setBlocked] = useState<string>(rating.isTheDriverBlocked)
 
-    // Funkcija za obradu odbijanja profila korisnika
+    // Funkcija za obradu blokiranja vozača
     const blockDriver = async () => {
         try {
             const response = await RatingService.blockDriver(rating.driver);
             if (response.message === '1') {
                 alert('Uspešno ste blokirali vozača!');
+                setBlocked('Da');
+            }
+            else {
+                alert('Došlo je do greške!');
+            }
+        } catch (error) {
+            console.error('Došlo je do greške: ', error);
+        }
+    }
+
+    // Funkcija za obradu odblokiranje vozača
+    const unblockDriver = async () => {
+        try {
+            const response = await RatingService.unblockDriver(rating.driver);
+            if (response.message === '1') {
+                alert('Uspešno ste odblokirali vozača!');
+                setBlocked('Ne');
             }
             else {
                 alert('Došlo je do greške!');
@@ -27,7 +46,7 @@ const RatingCard: React.FC<Props> = ({ rating }) => {
         <div style={cardStyleRC}>
             <ul className="list-group list-group-flush">
                 <li className="list-group-item special-title">
-                    <div>Uvid u ocenu</div>
+                    <div>Ocena vozača</div>
                 </li>
                 <li className="list-group-item">
                     <span>Vozač:</span>
@@ -35,14 +54,17 @@ const RatingCard: React.FC<Props> = ({ rating }) => {
                 </li>
                 <li className="list-group-item">
                     <span>Prosečna ocena:</span>
-                    <span>{rating.averageRating}</span>
+                    <span>{rating.averageRating.toFixed(4)}</span>
                 </li>
                 <li className="list-group-item">
                     <span>Blokiran:</span>
-                    <span>{rating.isTheDriverBlocked}</span>
+                    <span>{blocked}</span>
                 </li>
                 <li className="list-group-item" style={buttonContainerStyleRC}>
-                    <button className="btn btn-outline-dark" style={buttonStyleRC} onClick={blockDriver}>Blokiraj</button>
+                    {blocked !== 'Da' && (
+                        <button className="btn btn-outline-dark" style={buttonStyleRC} onClick={blockDriver}>Blokiraj</button>
+                    )}
+                    <button className="btn btn-outline-dark" style={buttonStyleRC} onClick={unblockDriver}>Odblokiraj</button>
                 </li>
             </ul>
         </div>

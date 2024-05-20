@@ -20,6 +20,7 @@ const Verification: React.FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Funkcija za prijem svih korisnika u sistemu sa servera
     useEffect(() => {
         const fetchData = async () => {
             try {

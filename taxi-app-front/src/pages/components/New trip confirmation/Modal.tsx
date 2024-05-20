@@ -25,20 +25,24 @@ const ConfirmationOfNewTrip: React.FC<ConfirmationOfNewTripProps> = ({
     const [durationOfTheTrip, setDurationOfTheTrip] = useState<number>(0.0);
     const [timeForTheTaxiToArrive, setTimeForTheTaxiToArrive] = useState<number>(0.0);
 
+    // Funkcija koja vraća random broj za udaljenost
     function getRandomNumber(): number {
         return Math.floor(Math.random() * 10) + 1;
     }
 
+    // Funkcija koja vraća random broj za vreme vožnje
     function getRandomMinute(): number {
-        return Math.floor(Math.random() * 3) + 1;
-        //return Math.floor(Math.random() * 56) + 5;
+        //return 1;
+        return Math.floor(Math.random() * 56) + 5;
     }
 
+    // Funkcija koja vraća random broj za vreme dok taxi stigne
     function getRandomMinuteForTaxiToArrive(): number {
-        return Math.floor(Math.random() * 3) + 1;
-        //return Math.floor(Math.random() * 6) + 3;
+        //return 1;
+        return Math.floor(Math.random() * 6) + 3;
     }
 
+    // Funkcija za podešavanje vrednosti za dinamički prikaz
     useEffect(() => {
         setPriceOfTheTrip(startingPrice + (getRandomNumber() * pricePerKilometer));
         setDurationOfTheTrip(getRandomMinute());
@@ -46,20 +50,20 @@ const ConfirmationOfNewTrip: React.FC<ConfirmationOfNewTripProps> = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sAddress, fAddress]);
 
+    // Funkcija za obradu kreiranja nove vožnje
     const newTripConfirmation = async () => {
         const response = await TripService.createNewTrip(sAddress, fAddress, priceOfTheTrip, timeForTheTaxiToArrive, durationOfTheTrip);
         if (response.message === '1') {
             alert('Uspešno ste kreirali novu vožnju!');
             handleCloseModal();
-            window.location.reload();
         }
         else {
             alert('Došlo je do greške tokom obrade podataka!');
             handleCloseModal();
-            window.location.reload();
         }
     }
 
+    // Funkcija za obradu odustanka od nove vožnje
     const cancelingNewTrip = async () => {
         alert('Odustali ste od nove vožnje!');
         handleCloseModal();

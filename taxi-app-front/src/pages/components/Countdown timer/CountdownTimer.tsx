@@ -8,8 +8,9 @@ interface CountdownTimerProps {
 const CountdownTimer: React.FC<CountdownTimerProps> = ({ initialMinutes, onTimeUp }) => {
 
     const [timeLeft, setTimeLeft] = useState(initialMinutes * 60);
-    const [timeUp, setTimeUp] = useState(false);
+    const [timeUp, setTimeUp] = useState<boolean>(false);
 
+    // Funkcija za pokretanje i praćenje tajmera
     useEffect(() => {
         if (timeLeft <= 0) {
             setTimeUp(true);
@@ -24,6 +25,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ initialMinutes, onTimeU
         return () => clearInterval(timer);
     }, [timeLeft, onTimeUp]);
 
+    // Funkcija za podešavanje formata vremena u prikazu tajmera
     const formatTime = (seconds: number) => {
         const minutes = Math.floor(seconds / 60);
         const secs = seconds % 60;
@@ -32,7 +34,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ initialMinutes, onTimeU
 
     return (
         <div>
-            {timeUp ? <span>Isteklo je vreme!</span> : formatTime(timeLeft)}
+            {timeUp ? <span>Završila se vožnja!</span> : formatTime(timeLeft)}
         </div>
     );
 };

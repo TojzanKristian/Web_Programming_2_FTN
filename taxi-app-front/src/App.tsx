@@ -19,6 +19,7 @@ const App: React.FC = () => {
 
   const clientId = '781999004701-75nidrkkr11fc3jru4j98o65u7t9gp9j.apps.googleusercontent.com';
 
+  // Funkcija za podešavanje za google autentifikaciju
   useEffect(() => {
     function start() {
       gapi.client.init({

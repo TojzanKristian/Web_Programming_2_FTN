@@ -17,24 +17,26 @@ const RatingDriverModal: React.FC<Props> = ({ show, onClose, driver }) => {
         rating: 0,
     });
 
+    // Funkcija za podešavanje vrednosti
     const handleRatingChange = (value: number) => {
         setDriverRating({ ...driverRating, rating: value });
     };
 
+    // Funkcija za obradu ocenjivanje vozača
     const handleSubmit = async () => {
         if (driverRating.rating !== 0) {
-            console.log(driverRating.driver + driverRating.rating);
             const response = await RatingService.rateDriver(driverRating);
-            if(response.message === "1") {
+            if (response.message === "1") {
                 alert("Hvala što ste odvojili vreme da ocenite vozača!");
-                //onClose();
+                onClose();
             }
         } else {
-            console.log("!!!");
-            //onClose();
+            console.log("Došlo je do greške!");
+            onClose();
         }
-    };    
+    };
 
+    // Funkcija za obradu odustanka od ocenjivanja
     const cancelHandleSubmit = () => {
         onClose();
     };

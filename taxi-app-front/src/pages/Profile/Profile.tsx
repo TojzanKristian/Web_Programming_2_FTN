@@ -107,7 +107,7 @@ const Profile: React.FC = () => {
     }, [data]);
 
 
-    // Funkcija za validaciju polja i slanje podataka na server za registraciju
+    // Funkcija za validaciju polja i slanje podataka na server za izmenu profila
     const modifyProfile = async () => {
         var year = new Date(dateOfBirth);
         var currentYear = new Date().getFullYear();

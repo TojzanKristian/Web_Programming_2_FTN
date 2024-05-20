@@ -5,6 +5,7 @@ import './NewTrip.css';
 import ConfirmationOfNewTrip from '../components/New trip confirmation/Modal';
 import CountdownTimerModal from '../components/Countdown timer/CountdownTimerModal';
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import RatingDriverModal from '../components/Driver rating/DriverRating';
 const SERVER_URL = 'http://localhost:8986';
 
 const NewTrip: React.FC = () => {
@@ -17,6 +18,9 @@ const NewTrip: React.FC = () => {
     const handleCloseModal = () => setShowModal(false);
     const [timerDuration, setTimerDuration] = useState(0);
     const [showTimerModal, setShowTimerModal] = useState(false);
+    const [showModalRatings, setShowModalRatings] = useState<boolean>(false);
+    const [driverForRatings, setDriverForRatings] = useState<string>('');
+    const [driverToModal, setDriverToModal] = useState<string>('');
 
     // Funkcija za zaštitu stranice
     useEffect(() => {
@@ -27,6 +31,12 @@ const NewTrip: React.FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Funkcija koja podešava vrednost za zatvaranje modala za ocenu vozača
+    const handleCloseModalRatings = () => {
+        setShowModalRatings(false);
+    }
+
+    // Funkcija koja zaustavlja izvršavanje dok ne istekne tajmer
     function wait(ms: any) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
@@ -40,9 +50,10 @@ const NewTrip: React.FC = () => {
         hubConnection.start()
             .then(() => {
                 console.log('Uspešna konekcija na SignalR hub!');
-                hubConnection.on('TripAccepted', (message) => {
+                hubConnection.on('TripAccepted', async (message) => {
                     console.log('Primljena poruka kroz SignalR hub:', message.timeForTheTaxiToArrive, message.result);
 
+                    setDriverToModal(message.result.driver);
                     const timeForTheTaxiToArriveNumber = parseFloat(message.timeForTheTaxiToArrive);
                     const durationInMinutes = parseInt(message.result.durationOfTheTrip.replace('min', ''));
                     const timeForTheTaxiToArriveInt = Math.round(timeForTheTaxiToArriveNumber);
@@ -50,14 +61,25 @@ const NewTrip: React.FC = () => {
                     setTimerDuration(timeForTheTaxiToArriveInt + durationOfTheTripInt);
                     setShowTimerModal(true);
 
-                    wait(((timeForTheTaxiToArriveInt + durationInMinutes) * 60 * 1000) + 10000);
-                    
+                    await wait(((timeForTheTaxiToArriveNumber + durationInMinutes) * 60 * 1000) + 10000);
+                    if (driverForRatings === "") {
+                        const driver = message.result.driver;
+                        setDriverForRatings(driver);
+                        handleShowModalRatingsAsync(message.result.driver);
+                    }
                 });
             })
             .catch((error) => {
                 console.error('Došlo je do greške tokom konekcije na SignalR hub:', error);
             });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    // Funkcija koja podešava vrednost za otvaranje modala za ocenu vozača
+    const handleShowModalRatingsAsync = (driver: string) => {
+        setDriverToModal(driver);
+        setShowModalRatings(true);
+    }
 
     // Funkcija za validaciju polja i otvaranje stranice za potvrdu ili odbijanje nove vožnje
     const creatingNewTrip = async () => {
@@ -102,6 +124,7 @@ const NewTrip: React.FC = () => {
                     title={'Odbrojavanje'}
                     initialMinutes={timerDuration}
                 />
+                <RatingDriverModal show={showModalRatings} onClose={handleCloseModalRatings} driver={driverToModal} />
             </div>
         </div>
     );

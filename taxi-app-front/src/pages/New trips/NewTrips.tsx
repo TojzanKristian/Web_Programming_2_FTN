@@ -10,7 +10,7 @@ const NewTrips: React.FC = () => {
     const redirection = useNavigate();
     const [trips, setTrips] = useState<any[]>([]);
     const [timerDuration, setTimerDuration] = useState(0);
-    const [showTimerModal, setShowTimerModal] = useState(false);
+    const [showTimerModal, setShowTimerModal] = useState<boolean>(false);
 
     // Funkcija za zaštitu stranice
     useEffect(() => {
@@ -25,25 +25,39 @@ const NewTrips: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                console.log('....');
                 const response = await TripService.getActiceTrips();
-                setTrips(response);
+                if (response.message === '3') {
+                    alert('Vaš profil nije odobren. Sačekajte dok admin odobri vaš profil!');
+                    redirection('/dashboard-driver');
+                }
+                else if (response.message === '2') {
+                    alert('Vaš profil je blokiran. Trenutno nemate pravo da obavljate vožnje!');
+                    redirection('/dashboard-driver');
+                }
+                else if (response.message === '1') {
+                    setTrips(response.data);
+                }
+                else {
+                    console.log('Došlo je do greške!');
+                }
             } catch (error) {
                 console.error('Došlo je do greške: ', error);
             }
         };
-
         fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Funkcija koja zaustavlja izvršavanje dok tajmer ne istekne
     function wait(ms: any) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    // Funkcija za prihvatanje vožnje
     const takeTheTrip = async (trip: any) => {
         try {
             const response = await TripService.acceptanceOfTrip(trip);
-            console.log(response)
             if (response.message === "1") {
                 const timeForTheTaxiToArriveNumber = parseFloat(response.timeForTheTaxiToArrive);
                 const timeForTheTaxiToArriveInt = Math.round(timeForTheTaxiToArriveNumber);

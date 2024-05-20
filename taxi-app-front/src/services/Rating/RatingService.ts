@@ -34,6 +34,17 @@ class RatingService {
             throw new Error('Došlo je do greške: ' + (error as AxiosError).message);
         }
     }
+
+    async unblockDriver(driver: any) {
+        try {
+            const response = await axios.put(`${SERVER_URL}/rating/unblockDriver`, {
+                driver: driver
+            });
+            return response.data;
+        } catch (error) {
+            throw new Error('Došlo je do greške: ' + (error as AxiosError).message);
+        }
+    }
 }
 
 export default new RatingService();

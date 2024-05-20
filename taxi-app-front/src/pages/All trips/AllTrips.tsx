@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { titleStyleAT, tableStyleAT, tdStyleAT } from './AllTripsCSS'
 import TripService from '../../services/Trip/TripService';
+import { Trip } from '../../interfaces/Trip';
 
 const AllTrips: React.FC = () => {
 
     const redirection = useNavigate();
-    const [trips, setTrips] = useState<any[]>([]);
+    const [trips, setTrips] = useState<Trip[]>([]);
 
     // Funkcija za zaštitu stranice
     useEffect(() => {
@@ -18,19 +19,27 @@ const AllTrips: React.FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // Funkcija za prijem mojih prethodnih vožnji sa servera
+    // Funkcija za prijem svih vožnji u sistemu sa servera
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await TripService.getAllTrips();
-                setTrips(response);
+                const mappedTrips = response.map((trip: any) => ({
+                    Driver: trip.driver,
+                    Passenger: trip.passenger,
+                    StartingAddress: trip.startingAddress,
+                    FinalAddress: trip.finalAddress,
+                    PriceOfTheTrip: trip.priceOfTheTrip.replace('din', ''),
+                    DurationOfTheTrip: trip.durationOfTheTrip.replace('min', ''),
+                    State: trip.state
+                }));
+                setTrips(mappedTrips);
             } catch (error) {
                 console.error('Došlo je do greške: ', error);
             }
         };
 
         fetchData();
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -54,13 +63,13 @@ const AllTrips: React.FC = () => {
                     {trips.map((trip, index) => (
                         <tr key={index}>
                             <td>{index + 1}</td>
-                            <td style={tdStyleAT}>{trip.driver}</td>
-                            <td style={tdStyleAT}>{trip.passenger}</td>
-                            <td style={tdStyleAT}>{trip.startingAddress}</td>
-                            <td style={tdStyleAT}>{trip.finalAddress}</td>
-                            <td style={tdStyleAT}>{trip.durationOfTheTrip.replace('min', '')}</td>
-                            <td style={tdStyleAT}>{trip.priceOfTheTrip.replace('din', '')}</td>
-                            <td style={tdStyleAT}>{trip.state}</td>
+                            <td style={tdStyleAT}>{trip.Driver}</td>
+                            <td style={tdStyleAT}>{trip.Passenger}</td>
+                            <td style={tdStyleAT}>{trip.StartingAddress}</td>
+                            <td style={tdStyleAT}>{trip.FinalAddress}</td>
+                            <td style={tdStyleAT}>{trip.DurationOfTheTrip}</td>
+                            <td style={tdStyleAT}>{trip.PriceOfTheTrip}</td>
+                            <td style={tdStyleAT}>{trip.State}</td>
                         </tr>
                     ))}
                 </tbody>
