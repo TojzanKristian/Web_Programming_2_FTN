@@ -48,6 +48,7 @@ namespace UserService
 
             await Task.Yield();
 
+            // Creating a Users database
             var dbContextUsers = CreateMyDbContextUsers.CreateDbContext();
             try
             {
@@ -58,6 +59,7 @@ namespace UserService
                 Debug.WriteLine($"Došlo je do greške tokom migracije: {ex.Message}");
             }
 
+            // Creating a database of Trips
             var dbContextTrips = CreateMyDbContextTrips.CreateDbContext();
             try
             {
@@ -68,33 +70,19 @@ namespace UserService
                 Debug.WriteLine($"Došlo je do greške tokom migracije: {ex.Message}");
             }
 
-
-            // TODO: Replace the following sample code with your own logic 
-            //       or remove this RunAsync override if it's not needed in your service.
-            /*var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
-
-            while (true)
+            // Creating a database of Ratings
+            var dbContextRatings = CreateMyDbContextRatings.CreateDbContext();
+            try
             {
-                cancellationToken.ThrowIfCancellationRequested();
-
-                using (var tx = this.StateManager.CreateTransaction())
-                {
-                    var result = await myDictionary.TryGetValueAsync(tx, "Counter");
-
-                    ServiceEventSource.Current.ServiceMessage(this.Context, "Current Counter Value: {0}",
-                        result.HasValue ? result.Value.ToString() : "Value does not exist.");
-
-                    await myDictionary.AddOrUpdateAsync(tx, "Counter", 0, (key, value) => ++value);
-
-                    // If an exception is thrown before calling CommitAsync, the transaction aborts, all changes are 
-                    // discarded, and nothing is saved to the secondary replicas.
-                    await tx.CommitAsync();
-                }
-
-                await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
-            }*/
+                await dbContextRatings.Database.MigrateAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Došlo je do greške tokom migracije: {ex.Message}");
+            }
         }
 
+        // User service
         #region Registration
         public async Task<string> RegistrationAsync(User newUser)
         {
@@ -298,7 +286,7 @@ namespace UserService
                     }
                     else
                     {
-                        Debug.WriteLine($"Došlo je do greške tokom èitanja korisnika iz baze!");
+                        Debug.WriteLine($"Došlo je do greške tokom èitanja korisnika iz baze podataka!");
                         return "0";
                     }
                 }
@@ -327,7 +315,7 @@ namespace UserService
                 var allUsers = dbContext.Users.ToList();
                 if (allUsers.Count != 0)
                 {
-                    Debug.WriteLine($"Uspešno su proèitani korisnici iz baze podataka i poslati su!");
+                    Debug.WriteLine($"Uspešno su proèitani i poslati korisnici iz baze podataka!");
                     return allUsers;
                 }
                 Debug.WriteLine($"Nema korisnika u bazi podataka!");
@@ -369,7 +357,7 @@ namespace UserService
                     return "0";
                 }
             }
-            Debug.WriteLine($"Greška! Korisnièko ime i status su prazni!");
+            Debug.WriteLine($"Greška! Korisnièko ime i/ili status nemaju vrednost!");
             return "0";
         }
         #endregion
@@ -402,11 +390,12 @@ namespace UserService
                     return "0";
                 }
             }
-            Debug.WriteLine($"Greška! Korisnièko ime i status su prazni!");
+            Debug.WriteLine($"Greška! Korisnièko ime i/ili status nemaju vrednost!");
             return "0";
         }
         #endregion
 
+        // Trip service
         #region Add new trip
         public async Task<(string, Trip)> AddNewTripAsync(Trip newTrip)
         {
@@ -455,7 +444,7 @@ namespace UserService
             }
             else
             {
-                Debug.WriteLine($"Došlo je do greške, nova vožnja nema vrednost!");
+                Debug.WriteLine($"Došlo je do greške nova vožnja nema vrednost!");
                 return ("0", null);
             }
         }
@@ -480,10 +469,10 @@ namespace UserService
                             returnList.Add(trip);
                         }
                     }
-                    Debug.WriteLine($"Uspešno su proèitane vožnje iz baze podataka i poslati su!");
+                    Debug.WriteLine($"Uspešno su proèitane i poslate vožnje iz baze podataka!");
                     return returnList;
                 }
-                Debug.WriteLine($"Nema korisnika u bazi podataka!");
+                Debug.WriteLine($"Nema vožnji u bazi podataka!");
                 return null;
             }
             catch (Exception ex)
@@ -513,10 +502,10 @@ namespace UserService
                             returnList.Add(trip);
                         }
                     }
-                    Debug.WriteLine($"Uspešno su proèitane vožnje iz baze podataka i poslati su!");
+                    Debug.WriteLine($"Uspešno su proèitane i poslate vožnje iz baze podataka!");
                     return returnList;
                 }
-                Debug.WriteLine($"Nema korisnika u bazi podataka!");
+                Debug.WriteLine($"Nema vožnji u bazi podataka!");
                 return null;
             }
             catch (Exception ex)
@@ -538,10 +527,10 @@ namespace UserService
                 var allTrips = dbContext.Trips.ToList();
                 if (allTrips.Count != 0)
                 {
-                    Debug.WriteLine($"Uspešno su proèitane vožnje iz baze podataka i poslati su!");
+                    Debug.WriteLine($"Uspešno su proèitane i poslate vožnje iz baze podataka!");
                     return allTrips;
                 }
-                Debug.WriteLine($"Nema korisnika u bazi podataka!");
+                Debug.WriteLine($"Nema vožnji u bazi podataka!");
                 return null;
             }
             catch (Exception ex)
@@ -571,10 +560,10 @@ namespace UserService
                             returnList.Add(trip);
                         }
                     }
-                    Debug.WriteLine($"Uspešno su proèitane vožnje iz baze podataka i poslati su!");
+                    Debug.WriteLine($"Uspešno su proèitane i poslate vožnje iz baze podataka!");
                     return returnList;
                 }
-                Debug.WriteLine($"Nema korisnika u bazi podataka!");
+                Debug.WriteLine($"Nema vožnji u bazi podataka!");
                 return null;
             }
             catch (Exception ex)
@@ -656,7 +645,158 @@ namespace UserService
             }
             else
             {
-                Debug.WriteLine($"Došlo je do greške, id, status ili vozaè nemaju vrednost!");
+                Debug.WriteLine($"Došlo je do greške id ili status nemaju vrednost!");
+                return "0";
+            }
+        }
+        #endregion
+
+        // Rating service
+        #region Get all ratings
+        public async Task<List<Rating>> GetAllRatingsAsync()
+        {
+            await Task.Yield();
+
+            try
+            {
+                var dbContext = CreateMyDbContextRatings.CreateDbContext();
+                var allRatings = dbContext.RatingsOfDrivers.ToList();
+                if (allRatings.Count != 0)
+                {
+                    Debug.WriteLine($"Uspešno su proèitane i poslate ocene iz baze podataka!");
+                    return allRatings;
+                }
+                Debug.WriteLine($"Nema ocena u bazi podataka!");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Došlo je do greške tokom registracije: {ex.Message}");
+                return null;
+            }
+        }
+        #endregion
+
+        #region Add new rating for driver
+        public async Task<string> NewRatingForDriverAsync(string driver, int rating)
+        {
+            await Task.Yield();
+
+            if (rating > 0 && driver != null)
+            {
+                try
+                {
+                    var dbContext = CreateMyDbContextRatings.CreateDbContext();
+                    var existingRating = await dbContext.RatingsOfDrivers.FirstOrDefaultAsync(t => t.Driver == driver);
+                    if (existingRating == null)
+                    {
+                        Rating newRating = new Rating
+                        {
+                            Driver = driver,
+                            NumberOfRatings = 1,
+                            AverageRating = rating,
+                            IsTheDriverBlocked = "Ne"
+                        };
+                        dbContext.RatingsOfDrivers.Add(newRating);
+                        await dbContext.SaveChangesAsync();
+                        Debug.WriteLine($"Podaci su uspešno ažurirani u bazi podataka!");
+                        return "1";
+                    }
+                    else
+                    {
+                        int ratingCounter = existingRating.NumberOfRatings;
+                        ratingCounter += 1;
+                        existingRating.AverageRating = (existingRating.AverageRating * (ratingCounter - 1) + rating) / ratingCounter;
+                        await dbContext.SaveChangesAsync();
+                        Debug.WriteLine($"Podaci su uspešno ažurirani u bazi podataka!");
+                        return "1";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Došlo je do greške tokom migracije: {ex.Message}");
+                    return "0";
+                }
+            }
+            else
+            {
+                Debug.WriteLine($"Došlo je do greške vozaè ili ocena nemaju vrednost!");
+                return "0";
+            }
+        }
+        #endregion
+
+        #region Admin has blocked the driver
+        public async Task<string> BlockDriverAsync(string driver)
+        {
+            await Task.Yield();
+
+            if (driver != null)
+            {
+                try
+                {
+                    var dbContext = CreateMyDbContextRatings.CreateDbContext();
+                    var existingRating = await dbContext.RatingsOfDrivers.FirstOrDefaultAsync(t => t.Driver == driver);
+                    if (existingRating != null)
+                    {
+                        existingRating.IsTheDriverBlocked = "Da";
+                        await dbContext.SaveChangesAsync();
+                        Debug.WriteLine($"Podaci su uspešno ažurirani u bazi podataka!");
+                        return "1";
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"Vozaè ne postoji u bazi podataka!");
+                        return "0";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Došlo je do greške tokom migracije: {ex.Message}");
+                    return "0";
+                }
+            }
+            else
+            {
+                Debug.WriteLine($"Došlo je do greške vozaè nema vrednost!");
+                return "0";
+            }
+        }
+        #endregion
+
+        #region Admin has unblocked the driver
+        public async Task<string> UnblockDriverAsync(string driver)
+        {
+            await Task.Yield();
+
+            if (driver != null)
+            {
+                try
+                {
+                    var dbContext = CreateMyDbContextRatings.CreateDbContext();
+                    var existingRating = await dbContext.RatingsOfDrivers.FirstOrDefaultAsync(t => t.Driver == driver);
+                    if (existingRating != null)
+                    {
+                        existingRating.IsTheDriverBlocked = "Ne";
+                        await dbContext.SaveChangesAsync();
+                        Debug.WriteLine($"Podaci su uspešno ažurirani u bazi podataka!");
+                        return "1";
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"Vozaè ne postoji u bazi podataka!");
+                        return "0";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Došlo je do greške tokom migracije: {ex.Message}");
+                    return "0";
+                }
+            }
+            else
+            {
+                Debug.WriteLine($"Došlo je do greške vozaè nema vrednost!");
                 return "0";
             }
         }
