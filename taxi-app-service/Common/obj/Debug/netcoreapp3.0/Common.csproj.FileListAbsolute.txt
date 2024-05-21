@@ -7,12 +7,3 @@ C:\Users\krist\source\repos\TaxiApp\Common\obj\Debug\netcoreapp3.0\Common.Assemb
 C:\Users\krist\source\repos\TaxiApp\Common\obj\Debug\netcoreapp3.0\Common.AssemblyInfo.cs
 C:\Users\krist\source\repos\TaxiApp\Common\obj\Debug\netcoreapp3.0\Common.dll
 C:\Users\krist\source\repos\TaxiApp\Common\obj\Debug\netcoreapp3.0\Common.pdb
-C:\Users\krist\OneDrive\Dokumentumok\GitHub\Web_Programming_2_FTN\taxi-app-service\Common\bin\Debug\netcoreapp3.0\Common.deps.json
-C:\Users\krist\OneDrive\Dokumentumok\GitHub\Web_Programming_2_FTN\taxi-app-service\Common\bin\Debug\netcoreapp3.0\Common.dll
-C:\Users\krist\OneDrive\Dokumentumok\GitHub\Web_Programming_2_FTN\taxi-app-service\Common\bin\Debug\netcoreapp3.0\Common.pdb
-C:\Users\krist\OneDrive\Dokumentumok\GitHub\Web_Programming_2_FTN\taxi-app-service\Common\obj\Debug\netcoreapp3.0\Common.csproj.AssemblyReference.cache
-C:\Users\krist\OneDrive\Dokumentumok\GitHub\Web_Programming_2_FTN\taxi-app-service\Common\obj\Debug\netcoreapp3.0\Common.csproj.CoreCompileInputs.cache
-C:\Users\krist\OneDrive\Dokumentumok\GitHub\Web_Programming_2_FTN\taxi-app-service\Common\obj\Debug\netcoreapp3.0\Common.AssemblyInfoInputs.cache
-C:\Users\krist\OneDrive\Dokumentumok\GitHub\Web_Programming_2_FTN\taxi-app-service\Common\obj\Debug\netcoreapp3.0\Common.AssemblyInfo.cs
-C:\Users\krist\OneDrive\Dokumentumok\GitHub\Web_Programming_2_FTN\taxi-app-service\Common\obj\Debug\netcoreapp3.0\Common.dll
-C:\Users\krist\OneDrive\Dokumentumok\GitHub\Web_Programming_2_FTN\taxi-app-service\Common\obj\Debug\netcoreapp3.0\Common.pdb

@@ -34,7 +34,7 @@ namespace WebService.Controllers
             _tripHubContext = tripHubContext;
         }
 
-        // GET, za dobavljanje aktivnih vožnji
+        // GET, za dobavljanje aktivnih vožnji vozaču
         [HttpGet("getActiveTrips")]
         public async Task<IActionResult> GetActiveTripsAsync()
         {
@@ -44,10 +44,41 @@ namespace WebService.Controllers
                 if (jwtConfig.ValidateToken(token))
                 {
                     User loggedIn = MySession.data.FirstOrDefault(x => x.Key.Equals(token)).Value;
+                    // Provera da li je profil vozača sa stanjem 'Čeka'
                     if (loggedIn != null)
                     {
+                        var users = await _proxy.GetUsersToVerifyAsync();
+                        if (users != null)
+                        {
+                            foreach (var user in users)
+                            {
+                                if (loggedIn.UserName.Equals(user.UserName))
+                                {
+                                    if (loggedIn.State.Equals("Čeka"))
+                                    {
+                                        return Ok(new { message = "3" });
+                                    }
+                                }
+                            }
+                        }
+                        // Provera da li je vozač blokiran
+                        var ratings = await _proxy.GetAllRatingsAsync();
+                        if (ratings != null)
+                        {
+                            foreach (var rating in ratings)
+                            {
+                                if (rating.Driver.Equals(loggedIn.UserName))
+                                {
+                                    if (rating.IsTheDriverBlocked.Equals("Da"))
+                                    {
+                                        return Ok(new { message = "2" });
+                                    }
+                                }
+                            }
+                        }
+
                         var result = await _proxy.GetActiveTripsAsync();
-                        if (result.Count != 0 && result != null)
+                        if (result != null)
                         {
                             var data = result;
                             Debug.WriteLine($"Poslati su podaci:\n");
@@ -60,7 +91,12 @@ namespace WebService.Controllers
                             {
                                 _logger.LogInformation($"Id: Id: {trip.Id}, vozač: {trip.Driver}, Putnik: {trip.Passenger}, početna adresa: {trip.StartingAddress}, krajnja adresa: {trip.FinalAddress}, cena vožnje: {trip.PriceOfTheTrip}, vremensko trajanje vožnje: {trip.DurationOfTheTrip}, stanje vožnje: {trip.State}");
                             }
-                            return Ok(data);
+                            var response = new
+                            {
+                                message = "1",
+                                data
+                            };
+                            return Ok(response);
                         }
                     }
                     Debug.WriteLine("Došlo je do greške! Ne postoji korisnik sa tim tokenom!");
@@ -95,7 +131,7 @@ namespace WebService.Controllers
                     if (loggedIn != null)
                     {
                         var result = await _proxy.GetDriversPreviousTripsAsync(loggedIn.UserName);
-                        if (result.Count != 0 && result != null)
+                        if (result != null)
                         {
                             var data = _mapper.Map<List<MyTripsDto>>(result);
                             Debug.WriteLine($"Poslati su podaci:\n");
@@ -143,7 +179,7 @@ namespace WebService.Controllers
                     if (loggedIn != null)
                     {
                         var result = await _proxy.GetAllTripsAsync();
-                        if (result.Count != 0 && result != null)
+                        if (result != null)
                         {
                             var data = _mapper.Map<List<AllTripsDto>>(result);
                             Debug.WriteLine($"Poslati su podaci:\n");
@@ -191,7 +227,7 @@ namespace WebService.Controllers
                     if (loggedIn != null)
                     {
                         var result = await _proxy.GetPassengersTripsAsync(loggedIn.UserName);
-                        if (result.Count != 0 && result != null)
+                        if (result != null)
                         {
                             var data = _mapper.Map<List<PreviousTripsDto>>(result);
                             Debug.WriteLine($"Poslati su podaci:\n");
@@ -270,7 +306,7 @@ namespace WebService.Controllers
             }
         }
 
-        // PUT, za obradu zahteva za ažuriranje vožnje
+        // PUT, za obradu zahteva za ažuriranje vožnje, vozač je prihvatio vožnju
         [HttpPut("acceptTheTrip")]
         public async Task<IActionResult> AcceptTheTripAsync([FromBody] AcceptTripRequest request)
         {
@@ -292,7 +328,6 @@ namespace WebService.Controllers
                         var timeForTheTaxiToArrive = MySession.waitForTrip.Where(kvp => kvp.Key == request.Id)
                                .Select(kvp => kvp.Value)
                                .FirstOrDefault();
-
 
                         if (timeForTheTaxiToArrive != null && timeForTheTaxiToArrive != string.Empty)
                         {

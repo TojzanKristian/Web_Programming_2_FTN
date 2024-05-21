@@ -19,4 +19,7 @@
 	<Section Name="ConnectionStringsTrips">
 		<Parameter Name="YourConnectionString" Value="Server=KRISZTIAN\SQLEXPRESS;Database=TaxiAppTrips;Trusted_Connection=True;" />
 	</Section>
+	<Section Name="ConnectionStringsRatings">
+		<Parameter Name="YourConnectionString" Value="Server=KRISZTIAN\SQLEXPRESS;Database=TaxiAppRatings;Trusted_Connection=True;" />
+	</Section>
 </Settings>

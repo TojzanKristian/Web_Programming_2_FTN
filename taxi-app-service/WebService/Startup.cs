@@ -36,6 +36,7 @@ namespace WebService
             {
                 cfg.AddProfile<UserProfile>();
                 cfg.AddProfile<TripProfile>();
+                cfg.AddProfile<RatingProfile>();
             });
 
             IMapper mapper = mapperConfig.CreateMapper();

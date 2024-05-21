@@ -19,9 +19,4 @@
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dto\" />
-    <Folder Include="Mappings\" />
-  </ItemGroup>
-
 </Project>

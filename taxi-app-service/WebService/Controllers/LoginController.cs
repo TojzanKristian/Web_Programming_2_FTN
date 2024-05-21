@@ -26,6 +26,7 @@ namespace WebService.Controllers
             _logger = logger;
         }
 
+        // POST, za obradu zahteva za prijavu korisnika
         [HttpPost]
         public async Task<IActionResult> LoginAsync([FromBody] LoginRequest request)
         {

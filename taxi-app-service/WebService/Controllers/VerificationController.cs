@@ -8,6 +8,7 @@ using Microsoft.ServiceFabric.Services.Remoting.Client;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using WebService.Dto;
 
@@ -34,7 +35,7 @@ namespace WebService.Controllers
             try
             {
                 List<User> usersToVerify = await _proxy.GetUsersToVerifyAsync();
-                if (usersToVerify.Count != 0 && usersToVerify != null)
+                if (usersToVerify != null)
                 {
                     var data = _mapper.Map<List<UserDto>>(usersToVerify);
                     Debug.WriteLine($"Poslati su podaci:\n");
@@ -73,6 +74,8 @@ namespace WebService.Controllers
                 var result = await _proxy.AcceptProfileAsync(request.UserName, request.State);
                 Debug.WriteLine(result);
                 _logger.LogInformation(result.ToString());
+                string token = MySession.data.FirstOrDefault(x => x.Value.Equals(request.UserName)).Key;
+                MySession.data[token].State = request.State;
                 return Ok(new { message = result });
             }
             Debug.WriteLine("Došlo je do greške!");
@@ -92,6 +95,8 @@ namespace WebService.Controllers
                 var result = await _proxy.RejectProfileAsync(request.UserName, request.State);
                 Debug.WriteLine(result);
                 _logger.LogInformation(result.ToString());
+                string token = MySession.data.FirstOrDefault(x => x.Value.Equals(request.UserName)).Key;
+                MySession.data[token].State = request.State;
                 return Ok(new { message = result });
             }
             Debug.WriteLine("Došlo je do greške!");
