@@ -24,5 +24,11 @@ namespace Common.Interfaces
         Task<List<Trip>> GetPassengersTripsAsync(string userName);
         Task<Trip> DriverAcceptedTheTripAsync(int id, string state, string driver);
         Task<string> TheTripIsFinishedAsync(int id, string state);
+
+        // Rating service
+        Task<List<Rating>> GetAllRatingsAsync();
+        Task<string> NewRatingForDriverAsync(string driver, int rating);
+        Task<string> BlockDriverAsync(string driver);
+        Task<string> UnblockDriverAsync(string driver);
     }
 }
