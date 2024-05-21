@@ -19,6 +19,7 @@ namespace ApiGatewayStateless
 
         public ApiGatewayStateless(StatelessServiceContext context) : base(context) { }
 
+        // User service
         public async Task<string> RegistrationAsync(User newUser)
             => await _userProxy.RegistrationAsync(newUser);
 
@@ -40,6 +41,7 @@ namespace ApiGatewayStateless
         public async Task<string> RejectProfileAsync(string userName, string profileState)
             => await _userProxy.RejectProfileAsync(userName, profileState);
 
+        // Trip service
         public async Task<(string, Trip)> AddNewTripAsync(Trip newTrip)
            => await _userProxy.AddNewTripAsync(newTrip);
 
@@ -60,6 +62,19 @@ namespace ApiGatewayStateless
 
         public async Task<string> TheTripIsFinishedAsync(int id, string state)
             => await _userProxy.TheTripIsFinishedAsync(id, state);
+
+        // Rating service
+        public async Task<string> NewRatingForDriverAsync(string driver, int rating)
+            => await _userProxy.NewRatingForDriverAsync(driver, rating);
+
+        public async Task<List<Rating>> GetAllRatingsAsync()
+            => await _userProxy.GetAllRatingsAsync();
+
+        public async Task<string> BlockDriverAsync(string driver)
+            => await _userProxy.BlockDriverAsync(driver);
+
+        public async Task<string> UnblockDriverAsync(string driver)
+            => await _userProxy.UnblockDriverAsync(driver);
 
         protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
             => this.CreateServiceRemotingInstanceListeners();
