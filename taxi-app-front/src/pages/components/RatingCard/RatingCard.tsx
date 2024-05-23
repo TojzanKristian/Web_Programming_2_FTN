@@ -53,6 +53,10 @@ const RatingCard: React.FC<Props> = ({ rating }) => {
                     <span>{rating.driver}</span>
                 </li>
                 <li className="list-group-item">
+                    <span>Broj ocena:</span>
+                    <span>{rating.numberOfRatings}</span>
+                </li>
+                <li className="list-group-item">
                     <span>Prosečna ocena:</span>
                     <span>{rating.averageRating.toFixed(4)}</span>
                 </li>

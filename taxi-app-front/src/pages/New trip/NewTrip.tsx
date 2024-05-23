@@ -6,6 +6,7 @@ import ConfirmationOfNewTrip from '../components/New trip confirmation/Modal';
 import CountdownTimerModal from '../components/Countdown timer/CountdownTimerModal';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import RatingDriverModal from '../components/Driver rating/DriverRating';
+import NavbarNewTrip from '../components/NavBar/NavBarNewTrip';
 const SERVER_URL = 'http://localhost:8986';
 
 const NewTrip: React.FC = () => {
@@ -19,7 +20,7 @@ const NewTrip: React.FC = () => {
     const [timerDuration, setTimerDuration] = useState(0);
     const [showTimerModal, setShowTimerModal] = useState(false);
     const [showModalRatings, setShowModalRatings] = useState<boolean>(false);
-    const [driverForRatings, setDriverForRatings] = useState<string>('');
+    const [driverForRatings] = useState<string>("");
     const [driverToModal, setDriverToModal] = useState<string>('');
 
     // Funkcija za zaštitu stranice
@@ -61,11 +62,10 @@ const NewTrip: React.FC = () => {
                     setTimerDuration(timeForTheTaxiToArriveInt + durationOfTheTripInt);
                     setShowTimerModal(true);
 
-                    await wait(((timeForTheTaxiToArriveNumber + durationInMinutes) * 60 * 1000) + 10000);
+                    await wait(((timeForTheTaxiToArriveNumber + durationInMinutes) * 60 * 1000) + 7500);
                     if (driverForRatings === "") {
                         const driver = message.result.driver;
-                        setDriverForRatings(driver);
-                        handleShowModalRatingsAsync(message.result.driver);
+                        handleShowModalRatingsAsync(driver);
                     }
                 });
             })
@@ -96,6 +96,7 @@ const NewTrip: React.FC = () => {
 
     return (
         <div className="newTripPageStyle">
+            <NavbarNewTrip />
             <div className="newTripContainerStyle">
                 <div className="newTripFormStyle">
                     <h1 className="newTripTitleStyle">Nova vožnja</h1>

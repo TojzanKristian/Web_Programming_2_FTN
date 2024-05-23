@@ -4,22 +4,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import RatingCard from '../components/RatingCard/RatingCard';
 import { pageStyleRating, containerStyleRating } from './RatingsCSS';
 import RatingService from '../../services/Rating/RatingService';
+import NavbarRatings from '../components/NavBar/NavBarRatings';
 
 const Ratings: React.FC = () => {
 
     const redirection = useNavigate();
     const [data, setData] = useState<[]>([]);
 
-    // Funkcija za zaštitu stranice
+    // Funkcija za zaštitu stranice i prijem podataka o ocenama vozača sa servera
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
             redirection('/login');
+            return;
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
-    useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await RatingService.getRatingeData();
@@ -29,10 +28,12 @@ const Ratings: React.FC = () => {
             }
         };
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <div style={pageStyleRating}>
+            <NavbarRatings />
             <div style={containerStyleRating}>
                 {data.map((rating, index) => (
                     <RatingCard key={index} rating={rating} />

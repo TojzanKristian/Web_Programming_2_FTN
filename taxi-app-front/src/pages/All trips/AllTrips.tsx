@@ -4,23 +4,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { titleStyleAT, tableStyleAT, tdStyleAT } from './AllTripsCSS'
 import TripService from '../../services/Trip/TripService';
 import { Trip } from '../../interfaces/Trip';
+import NavBarAllTrips from '../components/NavBar/NavBarAllTrips';
 
 const AllTrips: React.FC = () => {
 
     const redirection = useNavigate();
     const [trips, setTrips] = useState<Trip[]>([]);
 
-    // Funkcija za zaštitu stranice
+    // Funkcija za zaštitu stranice i prijem svih vožnji u sistemu sa servera
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
             redirection('/login');
+            return;
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
-    // Funkcija za prijem svih vožnji u sistemu sa servera
-    useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await TripService.getAllTrips();
@@ -38,13 +36,13 @@ const AllTrips: React.FC = () => {
                 console.error('Došlo je do greške: ', error);
             }
         };
-
         fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <div>
+            <NavBarAllTrips />
             <h1 style={titleStyleAT}>Sve vožnje u sistemu</h1>
             <table className="table table-dark table-hover" style={tableStyleAT}>
                 <thead>

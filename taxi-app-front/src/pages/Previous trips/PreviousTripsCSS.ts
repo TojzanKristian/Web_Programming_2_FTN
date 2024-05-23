@@ -1,6 +1,6 @@
 const titleStylePT: React.CSSProperties = {
+    marginTop: '50px',
     textAlign: 'center',
-    marginTop: '20px',
     marginBottom: '20px'
 };
 

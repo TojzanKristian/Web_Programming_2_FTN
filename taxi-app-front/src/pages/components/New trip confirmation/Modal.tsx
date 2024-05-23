@@ -38,7 +38,7 @@ const ConfirmationOfNewTrip: React.FC<ConfirmationOfNewTripProps> = ({
 
     // Funkcija koja vraća random broj za vreme dok taxi stigne
     function getRandomMinuteForTaxiToArrive(): number {
-        //return 1;
+        //return 0;
         return Math.floor(Math.random() * 6) + 3;
     }
 
@@ -67,31 +67,30 @@ const ConfirmationOfNewTrip: React.FC<ConfirmationOfNewTripProps> = ({
     const cancelingNewTrip = async () => {
         alert('Odustali ste od nove vožnje!');
         handleCloseModal();
+        window.location.reload();
     }
 
     return (
-        <>
-            <Modal show={showModal} onHide={handleCloseModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Potvrda nove vožnje</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <div>
-                        <span>Cena vožnje sa adrese {sAddress} na adresu {fAddress} je: {priceOfTheTrip} dinara.</span>
-                    </div>
-                    <div>
-                        <span>Vreme potrebno da taxi stigne do vas je: {timeForTheTaxiToArrive} minuta.</span>
-                    </div>
-                    <div>
-                        <span>Trajanje vožnje sa adrese {sAddress} na adresu {fAddress} je: {durationOfTheTrip} minuta.</span>
-                    </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <button className="btn btn-outline-dark" onClick={newTripConfirmation}>Potvrdi</button>
-                    <button className="btn btn-outline-dark" onClick={cancelingNewTrip}>Odustani</button>
-                </Modal.Footer>
-            </Modal>
-        </>
+        <Modal show={showModal} onHide={handleCloseModal}>
+            <Modal.Header closeButton>
+                <Modal.Title>Potvrda nove vožnje</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <div>
+                    <span>Cena vožnje sa adrese {sAddress} na adresu {fAddress} je: {priceOfTheTrip} dinara.</span>
+                </div>
+                <div>
+                    <span>Vreme potrebno da taxi stigne do vas je: {timeForTheTaxiToArrive} minuta.</span>
+                </div>
+                <div>
+                    <span>Trajanje vožnje sa adrese {sAddress} na adresu {fAddress} je: {durationOfTheTrip} minuta.</span>
+                </div>
+            </Modal.Body>
+            <Modal.Footer>
+                <button className="btn btn-outline-dark" onClick={newTripConfirmation}>Potvrdi</button>
+                <button className="btn btn-outline-dark" onClick={cancelingNewTrip}>Odustani</button>
+            </Modal.Footer>
+        </Modal>
     );
 };
 

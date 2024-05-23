@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import CountdownTimer from '../Countdown timer/CountdownTimer';
 import './Modal.css';
@@ -11,6 +11,25 @@ interface CountdownTimerModalProps {
 }
 
 const CountdownTimerModal: React.FC<CountdownTimerModalProps> = ({ show, onHide, title, initialMinutes }) => {
+
+    // Funkcija za obradu klika na reload dugme u pretrživaču
+    useEffect(() => {
+        const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+            event.preventDefault();
+            event.returnValue = 'Molimo vas sačekajte dok istekne tajmer!';
+        };
+
+        if (show) {
+            window.addEventListener('beforeunload', handleBeforeUnload);
+        } else {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        }
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [show]);
+
     return (
         <Modal show={show} onHide={onHide} backdrop="static" keyboard={false}>
             <Modal.Header closeButton={false}>

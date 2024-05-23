@@ -3,23 +3,21 @@ import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { titleStyleMT, tableStyleMT, tdStyleMT } from './MyTripsCSS'
 import TripService from '../../services/Trip/TripService';
+import NavBarMyTrips from '../components/NavBar/NavBarMyTrips';
 
 const MyTrips: React.FC = () => {
 
     const redirection = useNavigate();
     const [trips, setTrips] = useState<any[]>([]);
 
-    // Funkcija za zaštitu stranice
+    // Funkcija za zaštitu stranice i prijem mojih prethodnih vožnji sa servera
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
             redirection('/login');
+            return;
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
-    // Funkcija za prijem mojih prethodnih vožnji sa servera
-    useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await TripService.getMyTrips();
@@ -28,13 +26,13 @@ const MyTrips: React.FC = () => {
                 console.error('Došlo je do greške: ', error);
             }
         };
-
         fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <div>
+            <NavBarMyTrips />
             <h1 style={titleStyleMT}>Vaše prethodne vožnje</h1>
             <table className="table table-dark table-hover" style={tableStyleMT}>
                 <thead>

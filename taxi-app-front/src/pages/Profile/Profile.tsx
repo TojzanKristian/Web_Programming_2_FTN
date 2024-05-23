@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Profile.css';
 import { User, State } from '../../interfaces/User';
 import ProfileService from '../../services/Profile/EditProfileService';
+import NavbarProfileUser from "../components/NavBar/NavBarProfileUser";
+import NavbarProfileDriver from "../components/NavBar/NavBarProfileDriver";
+import NavbarProfileAdmin from "../components/NavBar/NavBarProfileAdmin";
 
 const Profile: React.FC = () => {
 
@@ -187,9 +190,26 @@ const Profile: React.FC = () => {
         }
     }
 
+    // Podešavanje za NavBar u zavisnosti od uloge
+    let NavbarComponent;
+    switch (data.userType) {
+        case 'Korisnik':
+            NavbarComponent = NavbarProfileUser;
+            break;
+        case 'Admin':
+            NavbarComponent = NavbarProfileAdmin;
+            break;
+        case 'Vozač':
+            NavbarComponent = NavbarProfileDriver;
+            break;
+        default:
+            NavbarComponent = null;
+    }
+
     return (
         <div>
             <div className="pageStyleProfile ">
+                {NavbarComponent && <NavbarComponent />}
                 <div className="containerStyleProfile ">
                     <div className="formStyleProfile ">
                         <h1 className="titleStyleProfile ">Profil</h1>

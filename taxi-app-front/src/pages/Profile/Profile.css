@@ -10,10 +10,11 @@
 }
 
 .containerStyleProfile {
+    margin-top: 40px;
     text-align: center;
     background-color: white;
     width: 450px;
-    height: 700px;
+    height: 690px;
     border-radius: 8px;
 }
 

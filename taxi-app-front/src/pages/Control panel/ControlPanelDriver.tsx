@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { pageStyleCP, containerStyleCP, headerStyleCP } from './ControlPanelCSS';
+import TripService from '../../services/Trip/TripService';
 
 const ControlPanelDriver: React.FC = () => {
 
@@ -16,14 +17,28 @@ const ControlPanelDriver: React.FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Funkcija za otvaranje stranice za profil
     const openProfilePage = async () => {
         redirect('/profile');
     }
 
+    // Funkcija za otvaranje stranice sa aktivnim vožnjama
     const openNewTripsPage = async () => {
-        redirect('/new-trips');
+        const response = await TripService.getActiceTrips();
+        if (response.message === '3') {
+            alert('Vaš profil nije odobren. Sačekajte dok admin odobri vaš profil!');
+            return;
+        }
+        else if (response.message === '2') {
+            alert('Vaš profil je blokiran. Trenutno nemate pravo da obavljate vožnje!');
+            return;
+        }
+        else if (response.message === '1') {
+            redirect('/new-trips');
+        }
     }
 
+    // Funkcija za otvaranje stranice sa prethodnim vožnjama
     const openMyTripsPage = async () => {
         redirect('/my-trips');
     }

@@ -1,6 +1,6 @@
 const titleStyleMT: React.CSSProperties = {
     textAlign: 'center',
-    marginTop: '20px',
+    marginTop: '50px',
     marginBottom: '20px'
 };
 

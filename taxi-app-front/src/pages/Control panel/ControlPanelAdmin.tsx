@@ -16,18 +16,22 @@ const ControlPanelAdmin: React.FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Funkcija za otvaranje stranice za profil
     const openProfilePage = async () => {
         redirect('/profile');
     }
 
+    // Funkcija za otvaranje stranice za verifikaciju
     const openVerificationPage = async () => {
         redirect('/verification');
     }
 
+    // Funkcija za otvaranje stranice za pregled ocena vozača
     const openRatingsPage = async () => {
         redirect('/ratings');
     }
 
+    // Funkcija za otvaranje stranice za svim vožnjama
     const openAllTripsPage = async () => {
         redirect('/all-trips');
     }

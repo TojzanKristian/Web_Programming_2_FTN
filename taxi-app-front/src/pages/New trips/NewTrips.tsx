@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { titleStyleNT, tableStyleNT, tdStyleNT } from './NewTripsCSS'
 import TripService from '../../services/Trip/TripService';
 import CountdownTimerModal from '../components/Countdown timer/CountdownTimerModal';
+import NavbarNewTrips from '../components/NavBar/NavBarNewTrips';
 
 const NewTrips: React.FC = () => {
 
@@ -12,36 +13,34 @@ const NewTrips: React.FC = () => {
     const [timerDuration, setTimerDuration] = useState(0);
     const [showTimerModal, setShowTimerModal] = useState<boolean>(false);
 
-    // Funkcija za zaštitu stranice
+    // Funkcija za zaštitu stranice i prijem aktivnih vožnji sa servera
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
             redirection('/login');
+            return;
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
-    // Funkcija za prijem aktivnih vožnji sa servera
-    useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log('....');
                 const response = await TripService.getActiceTrips();
                 if (response.message === '3') {
-                    alert('Vaš profil nije odobren. Sačekajte dok admin odobri vaš profil!');
                     redirection('/dashboard-driver');
+                    return;
                 }
                 else if (response.message === '2') {
-                    alert('Vaš profil je blokiran. Trenutno nemate pravo da obavljate vožnje!');
                     redirection('/dashboard-driver');
+                    return;
                 }
                 else if (response.message === '1') {
                     setTrips(response.data);
                 }
                 else {
                     console.log('Došlo je do greške!');
+                    redirection('/dashboard-driver');
                 }
             } catch (error) {
+                redirection('/dashboard-driver');
                 console.error('Došlo je do greške: ', error);
             }
         };
@@ -65,7 +64,7 @@ const NewTrips: React.FC = () => {
                 setTimerDuration(timeForTheTaxiToArriveInt + durationInMinutes);
                 setShowTimerModal(true);
 
-                await wait(((timeForTheTaxiToArriveInt + durationInMinutes) * 60 * 1000) + 10000);
+                await wait(((timeForTheTaxiToArriveInt + durationInMinutes) * 60 * 1000) + 7500);
                 const result = await TripService.theTripHasEnded(trip);
                 if (result.message === "1") {
                     alert('Vožnja je završena!');
@@ -86,6 +85,7 @@ const NewTrips: React.FC = () => {
 
     return (
         <div>
+            <NavbarNewTrips />
             <h1 style={titleStyleNT}>Trenutno aktivne vožnje</h1>
             <table className="table table-dark table-hover" style={tableStyleNT}>
                 <thead>
