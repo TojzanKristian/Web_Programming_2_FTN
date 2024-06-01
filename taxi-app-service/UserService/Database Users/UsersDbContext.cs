@@ -9,7 +9,7 @@ namespace UserService.Database
 
         public UsersDbContext(DbContextOptions options) : base(options)
         {
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
         }
     }
 }

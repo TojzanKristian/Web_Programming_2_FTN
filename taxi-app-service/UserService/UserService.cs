@@ -1,4 +1,4 @@
-using Common.Interfaces;
+Ôªøusing Common.Interfaces;
 using Common.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
@@ -56,7 +56,7 @@ namespace UserService
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Doölo je do greöke tokom migracije: {ex.Message}");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom migracije: {ex.Message}");
             }
 
             // Creating a database of Trips
@@ -67,7 +67,7 @@ namespace UserService
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Doölo je do greöke tokom migracije: {ex.Message}");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom migracije: {ex.Message}");
             }
 
             // Creating a database of Ratings
@@ -78,7 +78,7 @@ namespace UserService
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Doölo je do greöke tokom migracije: {ex.Message}");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom migracije: {ex.Message}");
             }
         }
 
@@ -102,12 +102,12 @@ namespace UserService
                             {
                                 if (u.UserName.Equals(newUser.UserName))
                                 {
-                                    Debug.WriteLine($"VeÊ postoji korisnik sa korisniËkim imenom {newUser.UserName} u bazi podataka!");
+                                    Debug.WriteLine($"Veƒá postoji korisnik sa korisniƒçkim imenom {newUser.UserName} u bazi podataka!");
                                     return "-1";
                                 }
                                 else if (u.Email.Equals(newUser.Email))
                                 {
-                                    Debug.WriteLine($"VeÊ postoji korisnik sa emailom {newUser.Email} u bazi podataka!");
+                                    Debug.WriteLine($"Veƒá postoji korisnik sa emailom {newUser.Email} u bazi podataka!");
                                     return "-2";
                                 }
                             }
@@ -122,21 +122,21 @@ namespace UserService
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine($"Doölo je do greöke tokom migracije: {ex.Message}");
+                        Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom migracije: {ex.Message}");
                         return "0";
                     }
-                    Debug.WriteLine($"Korisnik je uspeöno dodat u bazu podataka!");
+                    Debug.WriteLine($"Korisnik je uspe≈°no dodat u bazu podataka!");
                     return "1";
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Doölo je do greöke tokom registracije: {ex.Message}");
+                    Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom registracije: {ex.Message}");
                     return "0";
                 }
             }
             else
             {
-                Debug.WriteLine($"Doölo je do greöke, korisnik nema vrednost!");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke, korisnik nema vrednost!");
                 return "0";
             }
         }
@@ -159,7 +159,7 @@ namespace UserService
                         {
                             dbContext.Users.Add(newUser);
                             await dbContext.SaveChangesAsync();
-                            Debug.WriteLine($"Korisnik je uspeöno dodat u bazu podataka!");
+                            Debug.WriteLine($"Korisnik je uspe≈°no dodat u bazu podataka!");
                             return ("2", newUser);
                         }
                         else
@@ -169,31 +169,31 @@ namespace UserService
                             {
                                 dbContext.Users.Add(newUser);
                                 await dbContext.SaveChangesAsync();
-                                Debug.WriteLine($"Korisnik je uspeöno dodat u bazu podataka!");
+                                Debug.WriteLine($"Korisnik je uspe≈°no dodat u bazu podataka!");
                                 return ("2", newUser);
                             }
                             else
                             {
-                                Debug.WriteLine($"VeÊ postoji korisnik sa emailom {newUser.Email} u bazi podataka!");
+                                Debug.WriteLine($"Veƒá postoji korisnik sa emailom {newUser.Email} u bazi podataka!");
                                 return ("1", newUser);
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine($"Doölo je do greöke tokom migracije: {ex.Message}");
+                        Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom migracije: {ex.Message}");
                         return ("-1", null);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Doölo je do greöke tokom registracije: {ex.Message}");
+                    Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom registracije: {ex.Message}");
                     return ("-1", null);
                 }
             }
             else
             {
-                Debug.WriteLine($"Doölo je do greöke, korisnik nema vrednost!");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke, korisnik nema vrednost!");
                 return ("-1", null);
             }
         }
@@ -206,7 +206,7 @@ namespace UserService
 
             if (email.Equals(string.Empty) && password.Equals(string.Empty))
             {
-                Debug.WriteLine($"Greöka tokom prijave korisnika! Nisu primljeni podaci!");
+                Debug.WriteLine($"Gre≈°ka tokom prijave korisnika! Nisu primljeni podaci!");
                 return ("0", null);
             }
             else
@@ -221,38 +221,38 @@ namespace UserService
                         {
                             if (user.UserType.Equals(types.UserTypes[0]))
                             {
-                                Debug.WriteLine($"Uspeöno se prijavio korisnik!");
+                                Debug.WriteLine($"Uspe≈°no se prijavio korisnik!");
                                 return ("1", user);
                             }
                             else if (user.UserType.Equals(types.UserTypes[1]))
                             {
-                                Debug.WriteLine($"Uspeöno se prijavio vozaË!");
+                                Debug.WriteLine($"Uspe≈°no se prijavio vozaƒç!");
                                 return ("2", user);
                             }
                             else if (user.UserType.Equals(types.UserTypes[2]))
                             {
-                                Debug.WriteLine($"Uspeöno se prijavio admin!");
+                                Debug.WriteLine($"Uspe≈°no se prijavio admin!");
                                 return ("3", user);
                             }
                         }
                         else
                         {
-                            Debug.WriteLine($"Greöka tokom prijave korisnika! Korisnik je pogreöio lozinku!");
+                            Debug.WriteLine($"Gre≈°ka tokom prijave korisnika! Korisnik je pogre≈°io lozinku!");
                             return ("-1", null);
                         }
                     }
                     else
                     {
-                        Debug.WriteLine($"Greöka tokom prijave korisnika! Korisnik nije registrovan!");
+                        Debug.WriteLine($"Gre≈°ka tokom prijave korisnika! Korisnik nije registrovan!");
                         return ("-2", null);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Greöka tokom prijave korisnika: {ex.Message}");
+                    Debug.WriteLine($"Gre≈°ka tokom prijave korisnika: {ex.Message}");
                     return ("0", null);
                 }
-                Debug.WriteLine($"Greöka tokom prijave korisnika!");
+                Debug.WriteLine($"Gre≈°ka tokom prijave korisnika!");
                 return ("0", null);
             }
         }
@@ -281,24 +281,24 @@ namespace UserService
                         existingUser.UserType = editedUser.UserType;
                         existingUser.Image = editedUser.Image;
                         await dbContext.SaveChangesAsync();
-                        Debug.WriteLine($"Podaci su uspeöno aûurirani u bazi podataka!");
+                        Debug.WriteLine($"Podaci su uspe≈°no a≈æurirani u bazi podataka!");
                         return "1";
                     }
                     else
                     {
-                        Debug.WriteLine($"Doölo je do greöke tokom Ëitanja korisnika iz baze podataka!");
+                        Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom ƒçitanja korisnika iz baze podataka!");
                         return "0";
                     }
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Doölo je do greöke tokom migracije: {ex.Message}");
+                    Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom migracije: {ex.Message}");
                     return "0";
                 }
             }
             else
             {
-                Debug.WriteLine($"Doölo je do greöke, korisnik nema vrednost!");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke, korisnik nema vrednost!");
                 return "0";
             }
         }
@@ -315,7 +315,7 @@ namespace UserService
                 var allUsers = dbContext.Users.ToList();
                 if (allUsers.Count != 0)
                 {
-                    Debug.WriteLine($"Uspeöno su proËitani i poslati korisnici iz baze podataka!");
+                    Debug.WriteLine($"Uspe≈°no su proƒçitani i poslati korisnici iz baze podataka!");
                     return allUsers;
                 }
                 Debug.WriteLine($"Nema korisnika u bazi podataka!");
@@ -323,7 +323,7 @@ namespace UserService
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Doölo je do greöke tokom registracije: {ex.Message}");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom registracije: {ex.Message}");
                 return null;
             }
         }
@@ -344,20 +344,20 @@ namespace UserService
                     {
                         user.State = profileState;
                         await dbContext.SaveChangesAsync();
-                        emailSender.SendEmail("drsprojekat2023@gmail.com", "Obaveötenje o izmeni statusa vaöeg profila", "Admin je odobrio vaö profil!");
-                        Debug.WriteLine($"Podaci su uspeöno aûurirani u bazi podataka!");
+                        emailSender.SendEmail("drsprojekat2023@gmail.com", "Obave≈°tenje o izmeni statusa va≈°eg profila", "Admin je odobrio va≈° profil!");
+                        Debug.WriteLine($"Podaci su uspe≈°no a≈æurirani u bazi podataka!");
                         return "1";
                     }
-                    Debug.WriteLine($"Ne postoji korisnik u bazi podataka sa korisniËkim imenom {userName}!");
+                    Debug.WriteLine($"Ne postoji korisnik u bazi podataka sa korisniƒçkim imenom {userName}!");
                     return "0";
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Greöka tokom komunikacije sa bazom: {ex.Message}");
+                    Debug.WriteLine($"Gre≈°ka tokom komunikacije sa bazom: {ex.Message}");
                     return "0";
                 }
             }
-            Debug.WriteLine($"Greöka! KorisniËko ime i/ili status nemaju vrednost!");
+            Debug.WriteLine($"Gre≈°ka! Korisniƒçko ime i/ili status nemaju vrednost!");
             return "0";
         }
         #endregion
@@ -377,20 +377,20 @@ namespace UserService
                     {
                         user.State = profileState;
                         await dbContext.SaveChangesAsync();
-                        emailSender.SendEmail("drsprojekat2023@gmail.com", "Obaveötenje o izmeni statusa vaöeg profila", "Admin je odbio vaö profil!");
-                        Debug.WriteLine($"Podaci su uspeöno aûurirani u bazi podataka!");
+                        emailSender.SendEmail("drsprojekat2023@gmail.com", "Obave≈°tenje o izmeni statusa va≈°eg profila", "Admin je odbio va≈° profil!");
+                        Debug.WriteLine($"Podaci su uspe≈°no a≈æurirani u bazi podataka!");
                         return "1";
                     }
-                    Debug.WriteLine($"Ne postoji korisnik u bazi podataka sa korisniËkim imenom {userName}!");
+                    Debug.WriteLine($"Ne postoji korisnik u bazi podataka sa korisniƒçkim imenom {userName}!");
                     return "0";
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Greöka tokom komunikacije sa bazom: {ex.Message}");
+                    Debug.WriteLine($"Gre≈°ka tokom komunikacije sa bazom: {ex.Message}");
                     return "0";
                 }
             }
-            Debug.WriteLine($"Greöka! KorisniËko ime i/ili status nemaju vrednost!");
+            Debug.WriteLine($"Gre≈°ka! Korisniƒçko ime i/ili status nemaju vrednost!");
             return "0";
         }
         #endregion
@@ -415,7 +415,7 @@ namespace UserService
                             {
                                 if (trip.Id.Equals(newTrip.Id))
                                 {
-                                    Debug.WriteLine($"VeÊ postoji voûnja u bazi podataka!");
+                                    Debug.WriteLine($"Veƒá postoji vo≈ænja u bazi podataka!");
                                     return ("-1", null);
                                 }
                             }
@@ -430,21 +430,21 @@ namespace UserService
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine($"Doölo je do greöke tokom migracije: {ex.Message}");
+                        Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom migracije: {ex.Message}");
                         return ("0", null);
                     }
-                    Debug.WriteLine($"Voûnja je uspeöno dodata u bazu podataka!");
+                    Debug.WriteLine($"Vo≈ænja je uspe≈°no dodata u bazu podataka!");
                     return ("1", newTrip);
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Doölo je do greöke tokom registracije: {ex.Message}");
+                    Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom registracije: {ex.Message}");
                     return ("0", null);
                 }
             }
             else
             {
-                Debug.WriteLine($"Doölo je do greöke nova voûnja nema vrednost!");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke nova vo≈ænja nema vrednost!");
                 return ("0", null);
             }
         }
@@ -464,20 +464,20 @@ namespace UserService
                 {
                     foreach (var trip in allTrips)
                     {
-                        if (trip.State.Equals("»eka"))
+                        if (trip.State.Equals("ƒåeka"))
                         {
                             returnList.Add(trip);
                         }
                     }
-                    Debug.WriteLine($"Uspeöno su proËitane i poslate voûnje iz baze podataka!");
+                    Debug.WriteLine($"Uspe≈°no su proƒçitane i poslate vo≈ænje iz baze podataka!");
                     return returnList;
                 }
-                Debug.WriteLine($"Nema voûnji u bazi podataka!");
+                Debug.WriteLine($"Nema vo≈ænji u bazi podataka!");
                 return null;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Doölo je do greöke tokom registracije: {ex.Message}");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom registracije: {ex.Message}");
                 return null;
             }
         }
@@ -497,20 +497,20 @@ namespace UserService
                 {
                     foreach (var trip in allTrips)
                     {
-                        if (trip.Driver.Equals(userName) && trip.State.Equals("Zavröen"))
+                        if (trip.Driver.Equals(userName) && trip.State.Equals("Zavr≈°en"))
                         {
                             returnList.Add(trip);
                         }
                     }
-                    Debug.WriteLine($"Uspeöno su proËitane i poslate voûnje iz baze podataka!");
+                    Debug.WriteLine($"Uspe≈°no su proƒçitane i poslate vo≈ænje iz baze podataka!");
                     return returnList;
                 }
-                Debug.WriteLine($"Nema voûnji u bazi podataka!");
+                Debug.WriteLine($"Nema vo≈ænji u bazi podataka!");
                 return null;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Doölo je do greöke tokom registracije: {ex.Message}");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom registracije: {ex.Message}");
                 return null;
             }
         }
@@ -527,15 +527,15 @@ namespace UserService
                 var allTrips = dbContext.Trips.ToList();
                 if (allTrips.Count != 0)
                 {
-                    Debug.WriteLine($"Uspeöno su proËitane i poslate voûnje iz baze podataka!");
+                    Debug.WriteLine($"Uspe≈°no su proƒçitane i poslate vo≈ænje iz baze podataka!");
                     return allTrips;
                 }
-                Debug.WriteLine($"Nema voûnji u bazi podataka!");
+                Debug.WriteLine($"Nema vo≈ænji u bazi podataka!");
                 return null;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Doölo je do greöke tokom registracije: {ex.Message}");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom registracije: {ex.Message}");
                 return null;
             }
         }
@@ -560,15 +560,15 @@ namespace UserService
                             returnList.Add(trip);
                         }
                     }
-                    Debug.WriteLine($"Uspeöno su proËitane i poslate voûnje iz baze podataka!");
+                    Debug.WriteLine($"Uspe≈°no su proƒçitane i poslate vo≈ænje iz baze podataka!");
                     return returnList;
                 }
-                Debug.WriteLine($"Nema voûnji u bazi podataka!");
+                Debug.WriteLine($"Nema vo≈ænji u bazi podataka!");
                 return null;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Doölo je do greöke tokom registracije: {ex.Message}");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom registracije: {ex.Message}");
                 return null;
             }
         }
@@ -590,24 +590,24 @@ namespace UserService
                         existingTrip.Driver = driver;
                         existingTrip.State = state;
                         await dbContext.SaveChangesAsync();
-                        Debug.WriteLine($"Podaci su uspeöno aûurirani u bazi podataka!");
+                        Debug.WriteLine($"Podaci su uspe≈°no a≈æurirani u bazi podataka!");
                         return existingTrip;
                     }
                     else
                     {
-                        Debug.WriteLine($"Doölo je do greöke tokom Ëitanja korisnika iz baze!");
+                        Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom ƒçitanja korisnika iz baze!");
                         return null;
                     }
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Doölo je do greöke tokom migracije: {ex.Message}");
+                    Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom migracije: {ex.Message}");
                     return null;
                 }
             }
             else
             {
-                Debug.WriteLine($"Doölo je do greöke, id, status ili vozaË nemaju vrednost!");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke, id, status ili vozaƒç nemaju vrednost!");
                 return null;
             }
         }
@@ -628,24 +628,24 @@ namespace UserService
                     {
                         existingTrip.State = state;
                         await dbContext.SaveChangesAsync();
-                        Debug.WriteLine($"Podaci su uspeöno aûurirani u bazi podataka!");
+                        Debug.WriteLine($"Podaci su uspe≈°no a≈æurirani u bazi podataka!");
                         return "1";
                     }
                     else
                     {
-                        Debug.WriteLine($"Doölo je do greöke tokom Ëitanja korisnika iz baze!");
+                        Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom ƒçitanja korisnika iz baze!");
                         return "0";
                     }
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Doölo je do greöke tokom migracije: {ex.Message}");
+                    Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom migracije: {ex.Message}");
                     return "0";
                 }
             }
             else
             {
-                Debug.WriteLine($"Doölo je do greöke id ili status nemaju vrednost!");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke id ili status nemaju vrednost!");
                 return "0";
             }
         }
@@ -663,7 +663,7 @@ namespace UserService
                 var allRatings = dbContext.RatingsOfDrivers.ToList();
                 if (allRatings.Count != 0)
                 {
-                    Debug.WriteLine($"Uspeöno su proËitane i poslate ocene iz baze podataka!");
+                    Debug.WriteLine($"Uspe≈°no su proƒçitane i poslate ocene iz baze podataka!");
                     return allRatings;
                 }
                 Debug.WriteLine($"Nema ocena u bazi podataka!");
@@ -671,7 +671,7 @@ namespace UserService
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Doölo je do greöke tokom registracije: {ex.Message}");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom registracije: {ex.Message}");
                 return null;
             }
         }
@@ -699,28 +699,29 @@ namespace UserService
                         };
                         dbContext.RatingsOfDrivers.Add(newRating);
                         await dbContext.SaveChangesAsync();
-                        Debug.WriteLine($"Podaci su uspeöno aûurirani u bazi podataka!");
+                        Debug.WriteLine($"Podaci su uspe≈°no a≈æurirani u bazi podataka!");
                         return "1";
                     }
                     else
                     {
                         int ratingCounter = existingRating.NumberOfRatings;
                         ratingCounter += 1;
+                        existingRating.NumberOfRatings = ratingCounter;
                         existingRating.AverageRating = (existingRating.AverageRating * (ratingCounter - 1) + rating) / ratingCounter;
                         await dbContext.SaveChangesAsync();
-                        Debug.WriteLine($"Podaci su uspeöno aûurirani u bazi podataka!");
+                        Debug.WriteLine($"Podaci su uspe≈°no a≈æurirani u bazi podataka!");
                         return "1";
                     }
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Doölo je do greöke tokom migracije: {ex.Message}");
+                    Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom migracije: {ex.Message}");
                     return "0";
                 }
             }
             else
             {
-                Debug.WriteLine($"Doölo je do greöke vozaË ili ocena nemaju vrednost!");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke vozaƒç ili ocena nemaju vrednost!");
                 return "0";
             }
         }
@@ -741,24 +742,24 @@ namespace UserService
                     {
                         existingRating.IsTheDriverBlocked = "Da";
                         await dbContext.SaveChangesAsync();
-                        Debug.WriteLine($"Podaci su uspeöno aûurirani u bazi podataka!");
+                        Debug.WriteLine($"Podaci su uspe≈°no a≈æurirani u bazi podataka!");
                         return "1";
                     }
                     else
                     {
-                        Debug.WriteLine($"VozaË ne postoji u bazi podataka!");
+                        Debug.WriteLine($"Vozaƒç ne postoji u bazi podataka!");
                         return "0";
                     }
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Doölo je do greöke tokom migracije: {ex.Message}");
+                    Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom migracije: {ex.Message}");
                     return "0";
                 }
             }
             else
             {
-                Debug.WriteLine($"Doölo je do greöke vozaË nema vrednost!");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke vozaƒç nema vrednost!");
                 return "0";
             }
         }
@@ -779,24 +780,24 @@ namespace UserService
                     {
                         existingRating.IsTheDriverBlocked = "Ne";
                         await dbContext.SaveChangesAsync();
-                        Debug.WriteLine($"Podaci su uspeöno aûurirani u bazi podataka!");
+                        Debug.WriteLine($"Podaci su uspe≈°no a≈æurirani u bazi podataka!");
                         return "1";
                     }
                     else
                     {
-                        Debug.WriteLine($"VozaË ne postoji u bazi podataka!");
+                        Debug.WriteLine($"Vozaƒç ne postoji u bazi podataka!");
                         return "0";
                     }
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Doölo je do greöke tokom migracije: {ex.Message}");
+                    Debug.WriteLine($"Do≈°lo je do gre≈°ke tokom migracije: {ex.Message}");
                     return "0";
                 }
             }
             else
             {
-                Debug.WriteLine($"Doölo je do greöke vozaË nema vrednost!");
+                Debug.WriteLine($"Do≈°lo je do gre≈°ke vozaƒç nema vrednost!");
                 return "0";
             }
         }

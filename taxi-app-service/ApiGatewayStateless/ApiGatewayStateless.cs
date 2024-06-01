@@ -88,7 +88,6 @@ namespace ApiGatewayStateless
             foreach (var partition in partitionList)
             {
                 var partitionKey = partition.PartitionInformation as Int64RangePartitionInformation;
-
                 if (partitionKey != null)
                 {
                     var servicePartitionKey = new ServicePartitionKey(partitionKey.LowKey);
