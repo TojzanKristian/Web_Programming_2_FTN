@@ -34,7 +34,30 @@ Admin also have access to all trips in the system and their status.
 ## Illustration of the pages through images
 * **Registration page**:
 ![Registracija](https://github.com/TojzanKristian/Web_Programming_2_FTN/assets/116062572/c98069f7-a5e4-4644-887f-9e76a4aebb9f)
-
+* **Login page**:
+![Prijava](https://github.com/TojzanKristian/Web_Programming_2_FTN/assets/116062572/482d421d-f97a-49dc-be5f-cdc5b0d790c1)
+* **Dashboard page user**:
+![Dashboard-User](https://github.com/TojzanKristian/Web_Programming_2_FTN/assets/116062572/04f10db0-7f04-4cfb-9440-309f267e682f)
+* **Dashboard page driver**:
+![Dashboard-Driver](https://github.com/TojzanKristian/Web_Programming_2_FTN/assets/116062572/6e026d5c-9bae-42a5-a044-e54f8497c035)
+* **Dashboard page admin**:
+![Dashborad-Admin](https://github.com/TojzanKristian/Web_Programming_2_FTN/assets/116062572/ab4cb157-0703-4b2e-ab33-6aacc041cdfc)
+* **User profile page**:
+![Profil](https://github.com/TojzanKristian/Web_Programming_2_FTN/assets/116062572/57690d8b-afed-4d69-a296-5d796cdc0238)
+* **New trip page**:
+![Nova voznja](https://github.com/TojzanKristian/Web_Programming_2_FTN/assets/116062572/50989aa9-1c18-49d8-bae8-04c82b452086)
+* **New trips page**:
+![Nove voznje](https://github.com/TojzanKristian/Web_Programming_2_FTN/assets/116062572/2bdf6d54-dd90-4bf8-8597-1af5b4cbaefb)
+* **Previous trips page**:
+![Prethodne voznje](https://github.com/TojzanKristian/Web_Programming_2_FTN/assets/116062572/72a78a7f-62c0-41a5-8616-cd60fb767212)
+* **My trips page**:
+![Moje voznje](https://github.com/TojzanKristian/Web_Programming_2_FTN/assets/116062572/d4e97020-4cf8-4f18-aa14-bd06a7bc0a1d)
+* **All trips page**:
+![Sve voznje](https://github.com/TojzanKristian/Web_Programming_2_FTN/assets/116062572/0bad47c5-5af2-4759-8363-b48e96dd5da8)
+* **Verification page**:
+![Verifikacija](https://github.com/TojzanKristian/Web_Programming_2_FTN/assets/116062572/cc6df54c-dbfc-42c6-963d-598b028acafb)
+* **Ratings page**:
+![Ocene](https://github.com/TojzanKristian/Web_Programming_2_FTN/assets/116062572/aa99378c-3f69-4454-a80c-464130968abb)
 
 ## Used technologies
 1. _React with TypeScript_ - The client part of the application
